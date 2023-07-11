@@ -1,0 +1,23 @@
+.music-bar__outer-div {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
+
+.music-bar__song-div {
+    display: flex;
+    width: 100%;
+    align-items: flex-start;
+    gap: 10%;
+}
+
+.music-bar__play-bar-total {
+    background-color: orange;
+    width: 70%;
+}
+
+.music-bar__play-bar-played {
+    background-color: blue;
+    width: 0;
+}
