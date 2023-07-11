@@ -5,15 +5,20 @@ import { useEffect, useRef, useState } from "react";
 import './Main.css'
 
 export default function Main() {
-    // can remove ?. once stae is set up properly
-    // const song = useSelector(state => state.queue?.currentSong);
-    const song = {
-        id: 1,
-        name: "Fun song",
-        aws_src: "https://actions.google.com/sounds/v1/ambiences/ambient_hum_air_conditioner.ogg",
-        owner_id: 1,
-        description: "cool song"
-    }
+    const songId = useSelector(state => state.queue.currentSong);
+
+    useEffect(() => {
+        // dispatch
+    }, [songId]);
+
+
+    // const song = {
+    //     id: 1,
+    //     name: "Fun song",
+    //     aws_src: "https://actions.google.com/sounds/v1/ambiences/ambient_hum_air_conditioner.ogg",
+    //     owner_id: 1,
+    //     description: "cool song"
+    // }
 
     const [paused, setPaused] = useState(true);
     const [currentSong, setCurrentSong] = useState(song);
