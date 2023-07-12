@@ -6,19 +6,19 @@ from sqlalchemy.sql import text
 def seed_song():
     song1 = Song(
         name="Cool new song",
-        aws_src="https://freesound.org/people/DaveJf/sounds/695640/",
+        aws_src="https://actions.google.com/sounds/v1/office/click_continuous.ogg",
         owner_id=1,
         description="Awsome new song! give it a listen"
     )
     song2 = Song(
         name="Fun rock song!",
-        aws_src="https://freesound.org/people/Krumf/sounds/695670/",
+        aws_src="https://actions.google.com/sounds/v1/science_fiction/alien_beam.ogg",
         owner_id=1,
         description="Great new rock song! give it a listen"
     )
     song3 = Song(
         name="Cool EDM song",
-        aws_src="https://freesound.org/people/josefpres/sounds/695770/",
+        aws_src="https://actions.google.com/sounds/v1/sports/bowling.ogg",
         owner_id=2,
         description="EDM is awsome! give it a listen"
     )

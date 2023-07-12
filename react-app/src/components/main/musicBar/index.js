@@ -2,7 +2,7 @@ import { useEffect, useRef } from "react"
 import './MusicBar.css'
 
 
-export default function MusicBar({ paused, setPaused, currentSong, setCurrentSong, playedLength, audioEl}) {
+export default function MusicBar({ paused, setPaused, currentSong, playedLength, audioEl}) {
     const playedBar = useRef();
     const outerBar = useRef();
 
