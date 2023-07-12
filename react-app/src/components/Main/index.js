@@ -7,12 +7,12 @@ import { getSongThunk } from "../../store/songs";
 import SongForm from "./SongForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
+import { loadQueueThunk } from "../../store/queue";
 
 export default function Main() {
-    let songIdStore = 6; //useSelector(state => state.queue.currentSong);
+    const songId = useSelector(state => state.queue.currentSong);
     const currentSongStore = useSelector(state => state.songs.currentSong);
 
-    const [songId, setSongId] = useState(songIdStore)
     const [currentSong, setCurrentSong] = useState(currentSongStore);
 
     const [paused, setPaused] = useState(true);
@@ -21,12 +21,17 @@ export default function Main() {
     const dispatch = useDispatch();
 
     useEffect(() => {
+        console.log("INNN");
         (async () => {
-            // await dispatch(getQueue());  --- Get queue is not made yet
+            if (songId === null) return;
             const newSong = await dispatch(getSongThunk(songId));
             setCurrentSong(newSong?.payload);
         })();
-    }, [songId]);
+    }, [songId, dispatch]);
+
+    useEffect(() => {
+        dispatch(loadQueueThunk())
+    },[dispatch]);
 
 
     useEffect(() => {
@@ -38,7 +43,7 @@ export default function Main() {
     }, [paused]);
 
     const nextSong = () => {
-        setSongId(songId + 1)
+        alert("NEXT SONG DOES NOT WORK")
         console.log(songId)
     }
 
@@ -59,7 +64,7 @@ export default function Main() {
                     <Route path="/main/song-form">
                         <SongForm />
                     </Route>
-                    <Route>
+                    <Route path="/main/search">
                         <Search />
                     </Route>
                     <Route>

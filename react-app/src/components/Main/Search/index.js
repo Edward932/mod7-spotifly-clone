@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchSongsThunk } from "../../../store/songs";
+import SearchSongCard from "./SearchSongCard";
 
 export default function Search() {
     const songs = useSelector(state => state.songs.searchSongs);
@@ -65,7 +66,9 @@ export default function Search() {
             <div>
                 <ul>
                     {songArray.map(song => (
-                        <li key={song.id}>{song.name}</li>
+                        <li key={song.id}>
+                            <SearchSongCard song={song} />
+                        </li>
                     ))}
                 </ul>
             </div>

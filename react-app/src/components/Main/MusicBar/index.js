@@ -11,6 +11,7 @@ export default function MusicBar({ paused, setPaused, currentSong, playedLength,
     }, [playedLength]);
 
     const changeTime = (e) => {
+        if(!currentSong.id) return;
         const newPercent =  e.nativeEvent.offsetX / outerBar.current.clientWidth;
         audioEl.current.currentTime = newPercent * audioEl.current.duration;
     }
@@ -36,6 +37,7 @@ export default function MusicBar({ paused, setPaused, currentSong, playedLength,
                 <button
                     className="music-bar__play-button"
                     onClick={() => setPaused(!paused)}
+                    disabled={!currentSong.id}
                 >
                     {paused ? "play" : "pause"}
                 </button>
