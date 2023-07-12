@@ -1,14 +1,52 @@
-from flask import Blueprint
-from flask_login import login_required
-from app.models import Song
+from flask import Blueprint, request, redirect
+from flask_login import login_required, current_user
+from app.models import db, Song
+from app.aws import upload_file_to_s3, get_unique_filename
+from app.forms import SongForm
 
 songs_routes = Blueprint('songs', __name__)
 
 @songs_routes.route('/<int:songId>')
-# @login_required
+@login_required
 def song(songId):
     """
     Query for one song and return a dict
     """
     song = Song.query.get(songId)
     return song.to_dict()
+
+@songs_routes.route('', methods=["POST"])
+@login_required
+def post_song():
+    form = SongForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.validate_on_submit():
+        song = form.data["song_file"]
+        song.filename = get_unique_filename(song.filename)
+        upload = upload_file_to_s3(song)
+        print(upload)
+
+        if "url" not in upload:
+            # if the dictionary doesn't have a url key
+            # it means that there was an error when you tried to upload
+            # so you send back that error message (and you printed it above)
+            return { "error": upload }
+
+        url = upload["url"]
+        new_song = Song(
+            name=form.data["name"],
+            aws_src=url,
+            owner_id=current_user.id,
+            description=form.data["description"]
+        )
+        db.session.add(new_song)
+        db.session.commit()
+        return { "song": new_song.to_dict() }
+
+
+    if form.errors:
+        print(form.errors)
+        return { "error": form.errors }
+
+    return "Why we get to end?"

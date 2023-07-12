@@ -1,12 +1,13 @@
 import { Switch, Route } from "react-router-dom";
 import { useDispatch, useSelector } from 'react-redux';
-import MusicBar from "./musicBar";
+import MusicBar from "./MusicBar";
 import { useEffect, useRef, useState } from "react";
 import './Main.css'
 import { getSongThunk } from "../../store/songs";
+import SongForm from "./SongForm";
 
 export default function Main() {
-    let songIdStore = 1; //useSelector(state => state.queue.currentSong);
+    let songIdStore = 6; //useSelector(state => state.queue.currentSong);
     const currentSongStore = useSelector(state => state.songs.currentSong);
 
     const [songId, setSongId] = useState(songIdStore)
@@ -21,7 +22,7 @@ export default function Main() {
         (async () => {
             // await dispatch(getQueue());  --- Get queue is not made yet
             const newSong = await dispatch(getSongThunk(songId));
-            setCurrentSong(newSong.payload);
+            setCurrentSong(newSong?.payload);
         })();
     }, [songId]);
 
@@ -55,6 +56,9 @@ export default function Main() {
     return (
         <div className="main__outer-div">
             <Switch>
+                <Route path="/main/song-form">
+                    <SongForm />
+                </Route>
                 <Route>
                     <div>upper</div>
                 </Route>
