@@ -4,7 +4,7 @@ import { Route, Switch } from "react-router-dom";
 import SignupFormPage from "./components/SignupFormPage";
 import LoginFormPage from "./components/LoginFormPage";
 import { authenticate } from "./store/session";
-import Main from './components/Main';
+import Main from "./components/Main";
 
 function App() {
   const dispatch = useDispatch();
@@ -18,7 +18,7 @@ function App() {
       {isLoaded && (
         <Switch>
           <Route path="/splash">
-
+              SPLASH PAGE
           </Route>
           <Route path="/login" >
             <LoginFormPage />
