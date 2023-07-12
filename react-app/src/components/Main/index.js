@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from "react";
 import './Main.css'
 import { getSongThunk } from "../../store/songs";
 import SongForm from "./SongForm";
+import NavBar from "./NavBar";
 
 export default function Main() {
     let songIdStore = 6; //useSelector(state => state.queue.currentSong);
@@ -49,21 +50,20 @@ export default function Main() {
         setPlayedLength(playedSoFar / total);
     }
 
-    console.log(currentSong);
-    console.log(audioEl.current?.currentTime);
-    console.log(paused);
-
     return (
         <div className="main__outer-div">
-            <Switch>
-                <Route path="/main/song-form">
-                    <SongForm />
-                </Route>
-                <Route>
-                    <div>upper</div>
-                </Route>
-            </Switch>
-            <div>
+            <div className="main__main-div">
+                <NavBar />
+                <Switch>
+                    <Route path="/main/song-form">
+                        <SongForm />
+                    </Route>
+                    <Route>
+                        <div>upper</div>
+                    </Route>
+                </Switch>
+            </div>
+            <div className="main__outer-audio">
                 <audio
                     src={currentSong?.aws_src}
                     ref={audioEl}

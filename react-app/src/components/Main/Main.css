@@ -1,6 +1,17 @@
 .main__outer-div {
-    display: flex;
+    display: grid;
+    grid-template-rows: 93% 7%;
     height: 100%;
-    flex-direction: column;
-    justify-content: space-between;
+    border: 2px solid blue;
+}
+
+
+.main__outer-audio {
+    border: 2px solid green;
+}
+
+.main__main-div {
+    display: grid;
+    grid-template-columns: 10% 90%;
+
 }

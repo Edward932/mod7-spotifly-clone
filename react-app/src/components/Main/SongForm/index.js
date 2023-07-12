@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useHistory } from "react-router-dom";
 import { useDispatch } from 'react-redux';
 import { postSongThunk } from '../../../store/songs';
+import './SongForm.css';
 
 
 export default function SongForm() {
@@ -9,6 +10,7 @@ export default function SongForm() {
     const [songData, setSongData] = useState(null);
     const [description, setDescription] = useState("");
     const [loading, setLoading] = useState(false);
+    const [validationErrors, setValidationErrors] = useState({});
 
     const history = useHistory();
     const dispatch = useDispatch();
@@ -21,14 +23,12 @@ export default function SongForm() {
         formData.append("name", songName);
         formData.append("description", description);
 
-
-        console.log(formData)
         setLoading(true); // since loading is slow
         const res = await dispatch(postSongThunk(formData));
-        console.log('in submit handle', res)
+
         if (res.error) {
-            alert("ERROR FROM HANDLE SUBMIT")
             setLoading(false);
+            setValidationErrors(res.error)
         } else {
             history.push("/main")
         }
@@ -51,11 +51,13 @@ export default function SongForm() {
                         minLength={2}
                     />
                 </label>
+                <p className="validation-error">{validationErrors.name}</p>
                 <input
                     type="file"
                     accept="audio/*"
                     onChange={(e) => {setSongData(e.target.files[0])}}
                 />
+                 <p className="validation-error">{validationErrors.song_file}</p>
                 <label>
                     Song Description
                     <input
@@ -65,6 +67,7 @@ export default function SongForm() {
                         minLength={5}
                     />
                 </label>
+                <p className="validation-error">{validationErrors.description}</p>
                 <button type="submit">Upload Song</button>
             </form>
         </div>

@@ -3,6 +3,7 @@ from flask_login import login_required, current_user
 from app.models import db, Song
 from app.aws import upload_file_to_s3, get_unique_filename
 from app.forms import SongForm
+from sqlalchemy import exc
 
 songs_routes = Blueprint('songs', __name__)
 
@@ -41,12 +42,14 @@ def post_song():
             description=form.data["description"]
         )
         db.session.add(new_song)
-        db.session.commit()
+        try:
+            db.session.commit()
+        except exc.IntegrityError as e:
+            print(e)
+            return { "error": {
+                "name": ["Song name is taken. Please change name and upload agian"]
+            }}
         return { "song": new_song.to_dict() }
 
-
-    if form.errors:
-        print(form.errors)
+    else:
         return { "error": form.errors }
-
-    return "Why we get to end?"
