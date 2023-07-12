@@ -53,3 +53,12 @@ def post_song():
 
     else:
         return { "error": form.errors }
+
+
+@songs_routes.route("/search")
+@login_required
+def search_songs():
+    search_name = request.args.get('name')
+    songs = Song.query.filter(Song.name.ilike(f"%{search_name}%")).all()
+
+    return [ song.to_dict() for song in songs ]

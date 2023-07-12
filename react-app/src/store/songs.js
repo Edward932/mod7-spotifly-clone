@@ -1,5 +1,6 @@
 const GET_SONG = "songs/GET_SONG";
 const POST_SONG = "songs/POST_SONG";
+const SEARCH_SONGS = "songs/SEARCH_SONGS";
 
 const getSong = (song) => ({
     type: GET_SONG,
@@ -10,6 +11,11 @@ const postSong = (song) => ({
     type: POST_SONG,
     payload: song
 });
+
+const searchSongs = (songs) => ({
+    type: SEARCH_SONGS,
+    payload: songs
+})
 
 export const getSongThunk = (songId) => async (dispatch) => {
     const res = await fetch(`/api/songs/${songId}`);
@@ -41,6 +47,17 @@ export const postSongThunk = (post) => async (dispatch) => {
     }
 }
 
+export const searchSongsThunk = (searchName) => async (dispatch) => {
+    const res = await fetch(`/api/songs/search?name=${searchName}`);
+
+    if(res.ok) {
+        const data = await res.json();
+        return dispatch(searchSongs(data));
+    } else {
+        alert("ERROR IN SEARCH SONGS THUNK");
+    }
+}
+
 const initialState = { currentSong: {}, feedSongs: {}, searchSongs: {} }
 
 export default function reducer(state = initialState, action) {
@@ -48,7 +65,13 @@ export default function reducer(state = initialState, action) {
         case GET_SONG:
             return { ...state, currentSong: action.payload };
         case POST_SONG:
-            return { ...state, currentSong: action.payload }
+            return { ...state, currentSong: action.payload };
+        case SEARCH_SONGS:
+            const normalizedSearch = {};
+            action.payload.forEach(song => {
+                normalizedSearch[song.id] = song
+            });
+            return { ...state, searchSongs: normalizedSearch };
         default:
             return state;
     }

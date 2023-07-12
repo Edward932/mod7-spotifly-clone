@@ -6,6 +6,7 @@ import './Main.css'
 import { getSongThunk } from "../../store/songs";
 import SongForm from "./SongForm";
 import NavBar from "./NavBar";
+import Search from "./Search";
 
 export default function Main() {
     let songIdStore = 6; //useSelector(state => state.queue.currentSong);
@@ -57,6 +58,9 @@ export default function Main() {
                 <Switch>
                     <Route path="/main/song-form">
                         <SongForm />
+                    </Route>
+                    <Route>
+                        <Search />
                     </Route>
                     <Route>
                         <div>upper</div>
