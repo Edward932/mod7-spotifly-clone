@@ -1,0 +1,10 @@
+.nav-bar__outer-div {
+    border: 2px solid red;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.nav-bar__outer-div a.active {
+    color: red;
+}
