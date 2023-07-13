@@ -1,0 +1,7 @@
+.profile-song-card__outer-div {
+    width: 100%;
+    border: 2px solid purple;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}

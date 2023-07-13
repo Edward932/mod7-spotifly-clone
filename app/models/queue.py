@@ -14,7 +14,7 @@ class Queue(db.Model):
     )
     prev_songs = db.Column(db.String(255), default="")
     curr_song =  db.Column(
-        db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id")), nullable=False
+        db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id"))
     )
     next_songs = db.Column(db.String(255), default="")
 

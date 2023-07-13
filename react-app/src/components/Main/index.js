@@ -8,6 +8,7 @@ import SongForm from "./SongForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
 import { loadQueueThunk } from "../../store/queue";
+import Profile from "./Profile";
 
 export default function Main() {
     const songId = useSelector(state => state.queue.currentSong);
@@ -21,7 +22,6 @@ export default function Main() {
     const dispatch = useDispatch();
 
     useEffect(() => {
-        console.log("INNN");
         (async () => {
             if (songId === null) return;
             const newSong = await dispatch(getSongThunk(songId));
@@ -66,6 +66,9 @@ export default function Main() {
                     </Route>
                     <Route path="/main/search">
                         <Search />
+                    </Route>
+                    <Route path="/main/profile">
+                        <Profile />
                     </Route>
                     <Route>
                         <div>upper</div>

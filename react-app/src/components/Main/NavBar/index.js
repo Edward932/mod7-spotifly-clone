@@ -11,6 +11,9 @@ export default function NavBar() {
             <NavLink to="/main/song-form">
                 Upload new song
             </NavLink>
+            <NavLink to="/main/profile">
+                My Profile
+            </NavLink>
         </div>
     )
 }
