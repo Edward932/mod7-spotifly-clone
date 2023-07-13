@@ -1,7 +1,7 @@
 from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
 from app.models import db, Song
-from app.aws import upload_file_to_s3, get_unique_filename
+from app.aws import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.forms import SongForm
 from sqlalchemy import exc
 
@@ -62,3 +62,29 @@ def search_songs():
     songs = Song.query.filter(Song.name.ilike(f"%{search_name}%")).all()
 
     return [ song.to_dict() for song in songs ]
+
+
+@songs_routes.route("/user")
+@login_required
+def user_songs():
+    songs = Song.query.filter(Song.owner_id == current_user.id).all()
+
+    return [ song.to_dict() for song in songs ]
+
+
+@songs_routes.route("/<int:songId>", methods=["DELETE"])
+@login_required
+def delete_song(songId):
+    song = Song.query.get(songId)
+    if song.owner_id == current_user.id:
+        remove = remove_file_from_s3(song.aws_src)
+        print(remove)
+
+        if remove is not True:
+            return remove
+
+        db.session.delete(song)
+        db.session.commit()
+        return { "songId": song.id }
+
+    return { "error": "Only the creater of a song can delete it"}

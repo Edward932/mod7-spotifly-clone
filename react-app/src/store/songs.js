@@ -1,6 +1,8 @@
 const GET_SONG = "songs/GET_SONG";
 const POST_SONG = "songs/POST_SONG";
 const SEARCH_SONGS = "songs/SEARCH_SONGS";
+const GET_USER_SONGS = "songs/GET_USER_SONGS";
+const DELETE_SONG = "songs/DELETE_SONG"
 
 const getSong = (song) => ({
     type: GET_SONG,
@@ -15,6 +17,16 @@ const postSong = (song) => ({
 const searchSongs = (songs) => ({
     type: SEARCH_SONGS,
     payload: songs
+});
+
+const getUserSongs = (songs) => ({
+    type: GET_USER_SONGS,
+    payload: songs
+});
+
+const deleteSong = (songId) => ({
+    type: DELETE_SONG,
+    payload: songId
 })
 
 export const getSongThunk = (songId) => async (dispatch) => {
@@ -58,7 +70,35 @@ export const searchSongsThunk = (searchName) => async (dispatch) => {
     }
 }
 
-const initialState = { currentSong: {}, feedSongs: {}, searchSongs: {} }
+export const getUserSongsThunk = () => async (dispatch) => {
+    const res = await fetch('/api/songs/user');
+
+    if(res.ok) {
+        const data = await res.json();
+        return dispatch(getUserSongs(data));
+    } else {
+        alert("ERRRO IN GET USER SONGS THUNK")
+    }
+}
+
+export const deleteSongThunk = (songId) => async (dispatch) => {
+    const res = await fetch(`/api/songs/${songId}`, {
+        method: "DELETE"
+    });
+
+    console.log("INN THE THNUNKKSDLJFS:DLKJ")
+
+    if (res.ok) {
+        const data = await res.json();
+        console.log('data in thunk', data)
+        const id = data.songId
+        return dispatch(deleteSong(id));
+    } else {
+        alert("ERROR IN DELETE SONG THUNK");
+    }
+}
+
+const initialState = { currentSong: {}, feedSongs: {}, searchSongs: {}, userSongs: {} }
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
@@ -69,9 +109,19 @@ export default function reducer(state = initialState, action) {
         case SEARCH_SONGS:
             const normalizedSearch = {};
             action.payload.forEach(song => {
-                normalizedSearch[song.id] = song
+                normalizedSearch[song.id] = song;
             });
             return { ...state, searchSongs: normalizedSearch };
+        case GET_USER_SONGS:
+            const normalizedUserSongs = {};
+            action.payload.forEach(song => {
+                normalizedUserSongs[song.id] = song;
+            });
+            return { ...state, userSongs: normalizedUserSongs }
+        case DELETE_SONG:
+            const newUserSongs = state.userSongs;
+            delete newUserSongs[action.payload];
+            return { ...state, userSongs: newUserSongs }
         default:
             return state;
     }
