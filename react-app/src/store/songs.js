@@ -2,7 +2,8 @@ const GET_SONG = "songs/GET_SONG";
 const POST_SONG = "songs/POST_SONG";
 const SEARCH_SONGS = "songs/SEARCH_SONGS";
 const GET_USER_SONGS = "songs/GET_USER_SONGS";
-const DELETE_SONG = "songs/DELETE_SONG"
+const DELETE_SONG = "songs/DELETE_SONG";
+const UPDATE_SONG = "songs/UPDATE_SONG";
 
 const getSong = (song) => ({
     type: GET_SONG,
@@ -27,7 +28,12 @@ const getUserSongs = (songs) => ({
 const deleteSong = (songId) => ({
     type: DELETE_SONG,
     payload: songId
-})
+});
+
+const updateSong = (song) => ({
+    type: UPDATE_SONG,
+    payload: song
+});
 
 export const getSongThunk = (songId) => async (dispatch) => {
     const res = await fetch(`/api/songs/${songId}`);
@@ -48,7 +54,6 @@ export const postSongThunk = (post) => async (dispatch) => {
 
     if(res.ok) {
         const data = await res.json();
-        console.log(data);
         if (data.error) {
             return data
         }
@@ -86,7 +91,6 @@ export const deleteSongThunk = (songId) => async (dispatch) => {
         method: "DELETE"
     });
 
-    console.log("INN THE THNUNKKSDLJFS:DLKJ")
 
     if (res.ok) {
         const data = await res.json();
@@ -95,6 +99,24 @@ export const deleteSongThunk = (songId) => async (dispatch) => {
         return dispatch(deleteSong(id));
     } else {
         alert("ERROR IN DELETE SONG THUNK");
+    }
+}
+
+export const updateSongThunk = (song, songId) => async (dispatch) => {
+    const res = await fetch(`/api/songs/${songId}`, {
+        method: "PUT",
+        body: song
+    });
+
+    if(res.ok) {
+        const data = await res.json();
+        if (data.error) {
+            return data
+        }
+
+        return dispatch(updateSong(data));
+    } else {
+        alert("ERROR IN EDIT SONG THUNK")
     }
 }
 
@@ -122,6 +144,11 @@ export default function reducer(state = initialState, action) {
             const newUserSongs = state.userSongs;
             delete newUserSongs[action.payload];
             return { ...state, userSongs: newUserSongs }
+        case UPDATE_SONG:
+            const updatedUserSongs = state.userSongs;
+            updatedUserSongs[action.payload.id] = action.payload
+            console.log('in reducer', updatedUserSongs)
+            return { ...state, userSongs: updatedUserSongs }
         default:
             return state;
     }
