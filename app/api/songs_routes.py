@@ -4,6 +4,7 @@ from app.models import db, Song
 from app.aws import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.forms import SongForm
 from sqlalchemy import exc
+from werkzeug.datastructures import FileStorage
 
 songs_routes = Blueprint('songs', __name__)
 
@@ -88,3 +89,52 @@ def delete_song(songId):
         return { "songId": song.id }
 
     return { "error": "Only the creater of a song can delete it"}
+
+
+@songs_routes.route("/<int:songId>", methods=["PUT"])
+@login_required
+def update_song(songId):
+    song = Song.query.get(songId)
+
+    if song.owner_id != current_user.id:
+        return { "error": "Only the song owner can update a song"}
+
+    form = SongForm()
+    form["csrf_token"].data = request.cookies["csrf_token"]
+
+    if form.data["song_file"] is None:
+        file = FileStorage(filename="test.mp3")
+        form["song_file"].data = file
+
+        if form.validate_on_submit():
+            song.name = form.data["name"]
+            song.description = form.data["description"]
+
+            db.session.commit()
+            return song.to_dict()
+
+        else:
+            return { "error": form.errors }
+
+    elif form.validate_on_submit():
+        new_song = form.data["song_file"]
+        new_song.filename = get_unique_filename(new_song.filename)
+        upload = upload_file_to_s3(new_song)
+
+        if "url" not in upload:
+            return { "error": upload }
+
+        url = upload["url"]
+
+
+        print("-------------------")
+        print(url)
+        print("-------------------")
+        song.name = form.data["name"]
+        song.description = form.data["description"]
+        song.aws_src = url
+
+        db.session.commit()
+        return song.to_dict()
+
+    return { "error": form.errors }
