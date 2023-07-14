@@ -1,10 +1,16 @@
-import { useEffect, useRef } from "react"
+import { useEffect, useRef } from "react";
+import { useDispatch, useSelector } from 'react-redux';
+import { playNextSongThunk } from '../../../store/queue';
 import './MusicBar.css'
 
 
 export default function MusicBar({ paused, setPaused, currentSong, playedLength, audioEl}) {
     const playedBar = useRef();
     const outerBar = useRef();
+
+    const dispatch = useDispatch();
+
+    const queue = useSelector(state => state.queue)
 
     useEffect(() => {
         playedBar.current.style.setProperty('width', `${playedLength * 100}%`)
@@ -14,6 +20,11 @@ export default function MusicBar({ paused, setPaused, currentSong, playedLength,
         if(!currentSong.id) return;
         const newPercent =  e.nativeEvent.offsetX / outerBar.current.clientWidth;
         audioEl.current.currentTime = newPercent * audioEl.current.duration;
+    }
+
+    const handleNextSong = () => {
+        console.log(queue);
+        dispatch(playNextSongThunk());
     }
 
     return (
@@ -41,7 +52,7 @@ export default function MusicBar({ paused, setPaused, currentSong, playedLength,
                 >
                     {paused ? "play" : "pause"}
                 </button>
-                <button>Next (not working)</button>
+                {queue.nextSongs.length ? <button onClick={handleNextSong}>Next</button> : <button disabled={true} >No songs in queue</button>}
             </div>
         </div>
     )

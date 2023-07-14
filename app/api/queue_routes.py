@@ -19,3 +19,45 @@ def set_current_song(songId):
 def load_que():
     queue = Queue.query.filter(Queue.user_id == current_user.id).one()
     return queue.to_dict()
+
+@queue_routes.route("/<int:songId>", methods=["POST"])
+@login_required
+def add_song_next(songId):
+    queue = Queue.query.filter(Queue.user_id == current_user.id).one()
+    old_next_songs = queue.next_songs
+
+    songs_lst = [] if len(old_next_songs) == 0 else old_next_songs.split(",")
+    if len(songs_lst) >= 10:
+        songs_lst[9] = songId
+    else:
+        songs_lst.append(songId)
+
+    queue.next_songs = ",".join(str(v) for v in songs_lst)
+    db.session.commit()
+
+    return queue.to_dict()
+
+
+@queue_routes.route("/next")
+@login_required
+def next_song():
+    queue = Queue.query.filter(Queue.user_id == current_user.id).one()
+
+    next_songs = queue.next_songs.split(",")
+
+    prev_songs = queue.prev_songs.split(",")
+    if len(prev_songs) >= 10:
+        prev_songs.pop(0)
+        prev_songs.append(queue.curr_song)
+    else:
+        prev_songs.append(queue.curr_song)
+
+    queue.curr_song = next_songs.pop(0)
+    queue.next_songs = ",".join(str(v) for v in next_songs)
+    queue.prev_songs = ",".join(str(v) for v in prev_songs)
+
+    db.session.commit()
+
+
+
+    return queue.to_dict()

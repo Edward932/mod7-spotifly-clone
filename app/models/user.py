@@ -18,9 +18,9 @@ class User(db.Model, UserMixin):
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
-    songs = db.relationship("Song", back_populates="user")
-    feed = db.relationship("Feed", back_populates="user")
-    queue = db.relationship("Queue", back_populates="user")
+    songs = db.relationship("Song", back_populates="user", cascade="all, delete-orphan")
+    feed = db.relationship("Feed", back_populates="user", cascade="all, delete-orphan")
+    queue = db.relationship("Queue", back_populates="user", cascade="all, delete-orphan")
 
     @property
     def password(self):
