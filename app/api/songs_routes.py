@@ -121,15 +121,13 @@ def update_song(songId):
         new_song.filename = get_unique_filename(new_song.filename)
         upload = upload_file_to_s3(new_song)
 
+        remove = remove_file_from_s3(song.aws_src)
+
         if "url" not in upload:
             return { "error": upload }
 
         url = upload["url"]
 
-
-        print("-------------------")
-        print(url)
-        print("-------------------")
         song.name = form.data["name"]
         song.description = form.data["description"]
         song.aws_src = url

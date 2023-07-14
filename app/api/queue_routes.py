@@ -45,7 +45,7 @@ def next_song():
 
     next_songs = queue.next_songs.split(",")
 
-    prev_songs = queue.prev_songs.split(",")
+    prev_songs = [] if len(queue.prev_songs) == 0 else queue.prev_songs.split(",")
     if len(prev_songs) >= 10:
         prev_songs.pop(0)
         prev_songs.append(queue.curr_song)
@@ -57,7 +57,5 @@ def next_song():
     queue.prev_songs = ",".join(str(v) for v in prev_songs)
 
     db.session.commit()
-
-
 
     return queue.to_dict()
