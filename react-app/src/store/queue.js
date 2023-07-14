@@ -3,6 +3,7 @@ const LOAD_QUEUE = "queue/LOAD_QUEUE";
 const ADD_SONG_NEXT = "queue/ADD_SONG_NEXT";
 const PLAY_NEXT_SONG = "queue/PLAY_NEXT_SONG";
 const GET_NEXT_SONGS = "queue/GET_NEXT_SONGS";
+const SET_NEXT_SONGS = "queue/SET_NEXT_SONGS";
 
 
 const setCurrentSong = (songId) => ({
@@ -28,6 +29,11 @@ const playNextSong = (queue) => ({
 const getNextSongs = (songs) => ({
     type: GET_NEXT_SONGS,
     payload: songs
+});
+
+const setNextSongs = (songIds) => ({
+    type: SET_NEXT_SONGS,
+    payload: songIds
 });
 
 export const setCurrentSongThunk = (songId) => async (dispatch) => {
@@ -93,6 +99,21 @@ export const getNextSongsThunk = () => async (dispatch) => {
     }
 }
 
+export const setNextSongsThunk = (songIds) => async (dispatch) => {
+    const res = await fetch("/api/queue/next", {
+        method: "POST",
+        headers: { "Content-Type": "application/json"},
+        body: JSON.stringify(songIds)
+    });
+
+    if(res.ok) {
+        const data = await res.json();
+        return dispatch(setNextSongs(data.songs));
+    } else {
+        alert("ERRO RIN SET NEXT SONGS THUNK")
+    }
+}
+
 
 const initialState = { prevSongs: [], currentSong: null, nextSongs: [], nextSongsFull: [] }
 
@@ -108,6 +129,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, prevSongs: action.payload.prevSongs, currentSong: action.payload.currSong, nextSongs: action.payload.nextSongs }
         case GET_NEXT_SONGS:
             return { ...state, nextSongsFull: action.payload }
+        case SET_NEXT_SONGS:
+            return { ...state, nextSongs: action.payload }
         default:
             return state;
     }

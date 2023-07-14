@@ -1,11 +1,14 @@
 import { useDispatch, useSelector } from "react-redux"
 import "./DisplayQueue.css";
 import { useEffect, useState } from "react";
-import { getNextSongsThunk } from "../../../store/queue";
+import { getNextSongsThunk, setNextSongsThunk } from "../../../store/queue";
+import { useModal } from "../../../context/Modal";
 
 export default function DisplayQueue() {
     const currentSong = useSelector(state => state.songs.currentSong);
-    const user = useSelector(state => state.session.user)
+    const user = useSelector(state => state.session.user);
+
+    const { closeModal } = useModal();
 
     const dispatch = useDispatch();
 
@@ -17,6 +20,16 @@ export default function DisplayQueue() {
             setNextSongs(res.payload)
         })();
     }, [dispatch])
+
+    const handleSave = () => {
+        dispatch(setNextSongsThunk(nextSongs.map(song => song.id)));
+        closeModal();
+    }
+
+    const handleDelete = (index) => {
+        console.log(index)
+        setNextSongs([...nextSongs.slice(0, index), ...nextSongs.slice(index + 1)])
+    }
 
     return (
         <div className="display-queue__outer-div">
@@ -35,20 +48,25 @@ export default function DisplayQueue() {
             </div>
             <ul>
                 {nextSongs.length == 0 && "No songs in queue"}
-                {nextSongs.map(song => (
-                    <li key={song.id} className="display-queue__li">
+                {nextSongs.map((song, i) => (
+                    <li key={Math.random()} className="display-queue__li">
                         <div>
                             <p>{song.name} by {song.owner.username}</p>
                             <p>{song.description}</p>
+                            <p>Index: {i}</p>
                         </div>
                         <div>
-                            <button>Move up</button>
-                            <button>Move down</button>
-                            <button>Delete</button>
+                            <button>Move up (not done)</button>
+                            <button>Move down (not done)</button>
+                            <button onClick={() => handleDelete(i)}>Delete</button>
                         </div>
                     </li>
                 ))}
             </ul>
+            <div>
+                <button onClick={closeModal}>Cancel</button>
+                <button onClick={handleSave}>Save</button>
+            </div>
         </div>
     )
 }

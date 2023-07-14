@@ -1,4 +1,4 @@
-from flask import Blueprint
+from flask import Blueprint, request
 from flask_login import login_required, current_user
 from app.models import db, Queue, Song
 
@@ -65,11 +65,25 @@ def next_song():
 @login_required
 def get_next_songs():
     queue = Queue.query.filter(Queue.user_id == current_user.id).one().to_dict()
+    next_songs_lst = queue["nextSongs"]
 
-    print("====================")
-    print(queue)
-    print("====================")
+    songs = Song.query.filter(Song.id.in_(next_songs_lst)).all()
 
-    songs = Song.query.filter(Song.id.in_(queue["nextSongs"])).all()
+    song_dct = { song.id: song.to_dict() for song in songs }
 
-    return { "songs": [ song.to_dict() for song in songs ]}
+    return { "songs": [ song_dct[int(num_str)] for num_str in next_songs_lst ]}
+
+
+@queue_routes.route("/next", methods=["POST"])
+@login_required
+def set_next_songs():
+    queue = Queue.query.filter(Queue.user_id == current_user.id).one()
+    new_next_songs_lst = request.json
+    if len(new_next_songs_lst) == 0:
+        queue.next_songs = ""
+    else:
+        queue.next_songs = ",".join([ str(val) for val in new_next_songs_lst ])
+
+    db.session.commit()
+
+    return { "songs": new_next_songs_lst }
