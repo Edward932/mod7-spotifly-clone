@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchSongsThunk } from "../../../store/songs";
 import SearchSongCard from "./SearchSongCard";
 
-export default function Search() {
+export default function Search({ setPlayedLength, setPaused, audioEl, setCurrentSong }) {
     const songs = useSelector(state => state.songs.searchSongs);
 
     const [search, setSearch] = useState("");
@@ -67,7 +67,13 @@ export default function Search() {
                 <ul>
                     {songArray.map(song => (
                         <li key={song.id}>
-                            <SearchSongCard song={song} />
+                            <SearchSongCard
+                                song={song}
+                                setPlayedLength={setPlayedLength}
+                                setPaused={setPaused}
+                                audioEl={audioEl}
+                                setCurrentSong={setCurrentSong}
+                            />
                         </li>
                     ))}
                 </ul>

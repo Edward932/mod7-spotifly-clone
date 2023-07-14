@@ -1,12 +1,19 @@
 import { useDispatch } from "react-redux"
 import "./SearchSongCard.css"
 import { addSongNextThunk, setCurrentSongThunk } from "../../../../store/queue";
+import { getSongThunk } from "../../../../store/songs";
 
-export default function SearchSongCard({ song }) {
+export default function SearchSongCard({ song, setPlayedLength, setPaused, audioEl, setCurrentSong }) {
     const dispatch = useDispatch();
 
-    const handlePlay = () => {
-        dispatch(setCurrentSongThunk(song.id))
+    const handlePlay =  async () => {
+        dispatch(setCurrentSongThunk(song.id));
+        const newSong = await dispatch(getSongThunk(song.id));
+        setCurrentSong({})
+        setCurrentSong(newSong?.payload);
+        setPlayedLength(0);
+        setPaused(false);
+        audioEl.current.play();
     }
 
     const handleAddQueue = () => {

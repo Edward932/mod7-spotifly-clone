@@ -7,12 +7,13 @@ import { getSongThunk } from "../../store/songs";
 import SongForm from "./SongForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
-import { loadQueueThunk } from "../../store/queue";
+import { loadQueueThunk, playNextSongThunk } from "../../store/queue";
 import Profile from "./Profile";
 
 export default function Main() {
     const songId = useSelector(state => state.queue.currentSong);
     const currentSongStore = useSelector(state => state.songs.currentSong);
+    const queue = useSelector(state => state.queue);
 
     const [currentSong, setCurrentSong] = useState(currentSongStore);
 
@@ -42,9 +43,19 @@ export default function Main() {
         }
     }, [paused]);
 
-    const nextSong = () => {
-        alert("NEXT SONG DOES NOT WORK")
-        console.log(songId)
+    const nextSong = async () => {
+        if(!queue.nextSongs.length) {
+            setPaused(true);
+            return
+        }
+        const res = await dispatch(playNextSongThunk());
+        console.log(res.payload.currSong);
+        const newSong = await dispatch(getSongThunk(res.payload.currSong));
+        setCurrentSong({})
+        setCurrentSong(newSong?.payload);
+        setPlayedLength(0);
+        setPaused(false);
+        audioEl.current.play();
     }
 
     const audioEl = useRef();
@@ -65,7 +76,12 @@ export default function Main() {
                         <SongForm />
                     </Route>
                     <Route path="/main/search">
-                        <Search />
+                        <Search
+                            setPlayedLength={setPlayedLength}
+                            setPaused={setPaused}
+                            audioEl={audioEl}
+                            setCurrentSong={setCurrentSong}
+                        />
                     </Route>
                     <Route path="/main/profile">
                         <Profile />
@@ -89,6 +105,8 @@ export default function Main() {
                     currentSong={currentSong}
                     playedLength={playedLength}
                     audioEl={audioEl}
+                    nextSong={nextSong}
+                    queue={queue}
                     />
             </div>
         </div>
