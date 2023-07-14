@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from sqlalchemy import UniqueConstraint
 
 
 class Queue(db.Model):
@@ -17,6 +18,8 @@ class Queue(db.Model):
         db.Integer, db.ForeignKey(add_prefix_for_prod("songs.id"))
     )
     next_songs = db.Column(db.String(255), default="")
+
+    UniqueConstraint("user_id")
 
     songs = db.relationship("Song", back_populates="queue")
     user = db.relationship("User", back_populates="queue")

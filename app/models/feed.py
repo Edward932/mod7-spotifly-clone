@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from sqlalchemy import UniqueConstraint
 
 
 class Feed(db.Model):
@@ -16,6 +17,7 @@ class Feed(db.Model):
         db.DateTime(timezone=True), server_default=func.now(), onupdate=func.now()
     )
 
+    UniqueConstraint("user_id")
 
     user = db.relationship("User", back_populates="feed")
 
