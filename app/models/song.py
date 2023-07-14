@@ -1,5 +1,6 @@
 from .db import db, environment, SCHEMA, add_prefix_for_prod
 from sqlalchemy.sql import func
+from .user import User
 
 
 class Song(db.Model):
@@ -24,11 +25,13 @@ class Song(db.Model):
     queue = db.relationship("Queue", back_populates="songs")
 
     def to_dict(self, timestamps=False):
+        owner = User.query.filter(User.id == self.owner_id).one()
+
         dct = {
             "id": self.id,
             "name": self.name,
             "aws_src": self.aws_src,
-            "owner_id": "FIX THIS BY QUERRYING FOR OWNER",
+            "owner": owner.to_dict(),
             "description": self.description
         }
 

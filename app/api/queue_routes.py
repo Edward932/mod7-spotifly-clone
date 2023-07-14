@@ -1,6 +1,6 @@
 from flask import Blueprint
 from flask_login import login_required, current_user
-from app.models import db, Queue
+from app.models import db, Queue, Song
 
 queue_routes = Blueprint('queue', __name__)
 
@@ -59,3 +59,17 @@ def next_song():
     db.session.commit()
 
     return queue.to_dict()
+
+
+@queue_routes.route("/next-songs")
+@login_required
+def get_next_songs():
+    queue = Queue.query.filter(Queue.user_id == current_user.id).one().to_dict()
+
+    print("====================")
+    print(queue)
+    print("====================")
+
+    songs = Song.query.filter(Song.id.in_(queue["nextSongs"])).all()
+
+    return { "songs": [ song.to_dict() for song in songs ]}

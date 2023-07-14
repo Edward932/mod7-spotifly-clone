@@ -2,6 +2,7 @@ const SET_CURRENT_SONG = "queue/SET_CURRENT_SONG";
 const LOAD_QUEUE = "queue/LOAD_QUEUE";
 const ADD_SONG_NEXT = "queue/ADD_SONG_NEXT";
 const PLAY_NEXT_SONG = "queue/PLAY_NEXT_SONG";
+const GET_NEXT_SONGS = "queue/GET_NEXT_SONGS";
 
 
 const setCurrentSong = (songId) => ({
@@ -22,6 +23,11 @@ const addSongNext = (songId) => ({
 const playNextSong = (queue) => ({
     type: PLAY_NEXT_SONG,
     payload: queue
+});
+
+const getNextSongs = (songs) => ({
+    type: GET_NEXT_SONGS,
+    payload: songs
 });
 
 export const setCurrentSongThunk = (songId) => async (dispatch) => {
@@ -76,8 +82,19 @@ export const playNextSongThunk = () => async (dispatch) => {
     }
 }
 
+export const getNextSongsThunk = () => async (dispatch) => {
+    const res = await fetch("/api/queue/next-songs");
 
-const initialState = { prevSongs: [], currentSong: null, nextSongs: [] }
+    if(res.ok) {
+        const data = await res.json();
+        return dispatch(getNextSongs(data.songs));
+    } else {
+        alert("ERROR IN GET NEXT SONGS THUNK (QUEUE PAGE)")
+    }
+}
+
+
+const initialState = { prevSongs: [], currentSong: null, nextSongs: [], nextSongsFull: [] }
 
 export default function reducer(state = initialState, action) {
     switch(action.type) {
@@ -89,6 +106,8 @@ export default function reducer(state = initialState, action) {
             return { ...state, nextSongs: action.payload }
         case PLAY_NEXT_SONG:
             return { ...state, prevSongs: action.payload.prevSongs, currentSong: action.payload.currSong, nextSongs: action.payload.nextSongs }
+        case GET_NEXT_SONGS:
+            return { ...state, nextSongsFull: action.payload }
         default:
             return state;
     }
