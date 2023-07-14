@@ -76,7 +76,12 @@ export default function Main() {
                         <SongForm />
                     </Route>
                     <Route path="/main/search">
-                        <Search />
+                        <Search
+                            setPlayedLength={setPlayedLength}
+                            setPaused={setPaused}
+                            audioEl={audioEl}
+                            setCurrentSong={setCurrentSong}
+                        />
                     </Route>
                     <Route path="/main/profile">
                         <Profile />
