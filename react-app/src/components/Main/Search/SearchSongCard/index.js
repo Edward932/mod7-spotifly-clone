@@ -23,6 +23,7 @@ export default function SearchSongCard({ song, setPlayedLength, setPaused, audio
     return (
         <div className="search-song-card__outer">
             <p>Name: {song.name}</p>
+            <p>Artist: {song.owner.username}</p>
             <p>description: {song.description}</p>
             <div>
                 <button onClick={handleAddQueue}>Add to que</button>

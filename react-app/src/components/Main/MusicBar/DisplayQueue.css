@@ -1,0 +1,19 @@
+.display-queue__current {
+    display: flex;
+    flex-direction: row;
+    border: 2px solid blue;
+}
+
+.display-queue__li {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    border: 2px solid red;
+}
+
+.display-queue__outer-div {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px
+}

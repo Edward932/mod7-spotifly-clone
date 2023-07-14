@@ -1,13 +1,12 @@
 import { useEffect, useRef } from "react";
-import { useSelector } from 'react-redux';
 import './MusicBar.css'
+import OpenModalButton from "../../OpenModalButton";
+import DisplayQueue from "./DisplayQueue";
 
 
 export default function MusicBar({ queue, paused, setPaused, currentSong, playedLength, audioEl, nextSong}) {
     const playedBar = useRef();
     const outerBar = useRef();
-
-
 
     useEffect(() => {
         playedBar.current.style.setProperty('width', `${playedLength * 100}%`)
@@ -22,7 +21,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
     return (
         <div className="music-bar__outer-div">
             <div className="music-bar__song-div">
-                <p>{currentSong?.name || 'No song selected'}</p>
+                <p>{currentSong?.name && `${currentSong.name} By: ${currentSong.owner.username}`|| 'No song selected'}</p>
                 <div className="music-bar__play-bar-total"
                     ref={outerBar}
                     onClick={changeTime}
@@ -33,6 +32,12 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                     >
                         <p>Insert time later</p>
                     </div>
+                </div>
+                <div>
+                    <OpenModalButton
+                        modalComponent={<DisplayQueue/>}
+                        buttonText={"Edit Queue"}
+                    />
                 </div>
             </div>
             <div>
@@ -46,6 +51,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                 </button>
                 {queue.nextSongs.length ? <button onClick={nextSong}>Next</button> : <button disabled={true} >No songs in queue</button>}
             </div>
+
         </div>
     )
 }
