@@ -26,7 +26,7 @@ class Queue(db.Model):
 
     def to_dict(self):
         prev_songs_lst = [] if len(self.prev_songs) == 0 else self.prev_songs.split(",")
-        next_songs_lst = [] if len(self.prev_songs) == 0 else self.next_songs.split(",")
+        next_songs_lst = [] if len(self.next_songs) == 0 else self.next_songs.split(",")
 
         dct = {
             "id": self.id,
