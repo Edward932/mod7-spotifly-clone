@@ -30,7 +30,7 @@ export default function SongForm() {
             setLoading(false);
             setValidationErrors(res.error)
         } else {
-            history.push("/main")
+            history.push("/main/profile")
         }
     }
 
