@@ -46,7 +46,7 @@ export default function DisplayQueue() {
         <div className="display-queue__outer-div">
             <h3>{user.username}'s queue</h3>
             <div className="display-queue__current">
-                {currentSong ?
+                {currentSong.id ?
                     <>
                         <p>Now playing:</p>
                         <p>Name: {currentSong.name}</p>

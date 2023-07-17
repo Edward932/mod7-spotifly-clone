@@ -37,7 +37,7 @@ export default function Profile () {
                     buttonText={"Settings"}/>
             </div>
             <ul>
-                {songs.length === 0 && "You have not uploaded an songs :("}
+                {songs.length === 0 && "You have not uploaded any songs."}
                 {songs.map(song => (
                     <li key={song.id}>
                         <ProfileSongCard song={song} setNewDelete={setNewDelete} newDelete={newDelete} />

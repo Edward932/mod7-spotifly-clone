@@ -1,0 +1,25 @@
+.signup-form-page__errors {
+    color: red;
+}
+
+.signup-form-page__outer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 2px solid orange;
+    height: 100%;
+    width: 100%;
+}
+
+.signup-form-page__form-wrapper {
+    border: 2px solid purple;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+}
+
+.signup-form-page__form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
