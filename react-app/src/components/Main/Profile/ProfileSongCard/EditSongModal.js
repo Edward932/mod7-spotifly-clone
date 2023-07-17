@@ -55,6 +55,7 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
                         maxLength={50}
                         minLength={2}
                     />
+                    {songName.length >= 50 && <p>Song name max length reached</p>}
                 </label>
                 <p className="validation-error">{validationErrors.name}</p>
                 <label>
@@ -74,6 +75,7 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
                         maxLength={100}
                         minLength={5}
                     />
+                    {description.length >= 100 && <p>Song description max length reached</p>}
                 </label>
                 <p className="validation-error">{validationErrors.description}</p>
                 <button onClick={handleCancel}>Cancel</button>

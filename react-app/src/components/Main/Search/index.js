@@ -38,6 +38,7 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
                         placeholder="Enter a song or artist name"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
+                        maxLength={255}
                     />
                 </label>
                 <div>

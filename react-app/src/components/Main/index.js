@@ -86,8 +86,8 @@ export default function Main() {
     const handleTotalTime = () => {
         const total = Math.round(audioEl.current.duration);
         const seconds = total % 60;
-        const minutes = total - seconds;
-        setTotalLength(`${minutes}:${seconds}`);
+        const minutes = (total - seconds) / 60;
+        setTotalLength(`${minutes}:${seconds > 9 ? seconds : '0' + seconds}`);
     }
 
     return (

@@ -27,6 +27,10 @@ function LoginFormPage() {
     }
   };
 
+  const handleDemo = async () => {
+    await dispatch(login("demo@aa.io", "password"));
+  }
+
   return (
     <div className="login-form-page__outer">
       <div className="login-form-page__form-wrapper">
@@ -43,7 +47,9 @@ function LoginFormPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
+              maxLength={255}
             />
+            {email.length >= 255 && <p>Max email length reached</p>}
           </label>
           <label>
             Password
@@ -52,10 +58,13 @@ function LoginFormPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
+              maxLength={50}
             />
+            {password.length >= 50 && <p>Max password length reached</p>}
           </label>
           <button type="submit">Log In</button>
         </form>
+        <button onClick={handleDemo}>Login as Demo</button>
       </div>
     </div>
   );
