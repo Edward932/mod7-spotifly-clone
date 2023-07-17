@@ -59,9 +59,9 @@ function SignupFormPage() {
               onChange={(e) => setUsername(e.target.value)}
               required
               minLength={2}
-              maxLength={50}
+              maxLength={40}
             />
-            {username.length >= 50 && <p>Max username length reached</p>}
+            {username.length >= 40 && <p>Max username length reached</p>}
           </label>
           <label>
             Password
