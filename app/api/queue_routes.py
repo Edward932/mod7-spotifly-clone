@@ -48,8 +48,8 @@ def next_song():
     prev_songs = [] if len(queue.prev_songs) == 0 else queue.prev_songs.split(",")
     if len(prev_songs) >= 10:
         prev_songs.pop(0)
-        prev_songs.append(queue.curr_song)
-    else:
+
+    if queue.curr_song is not None:
         prev_songs.append(queue.curr_song)
 
     queue.curr_song = next_songs.pop(0)
@@ -99,8 +99,8 @@ def prev_song():
     next_songs = [] if len(queue.next_songs) == 0 else queue.next_songs.split(",")
     if len(next_songs) >= 10:
         next_songs.pop()
-        next_songs.insert(0, queue.curr_song)
-    else:
+
+    if queue.curr_song is not None:
         next_songs.insert(0, queue.curr_song)
 
     queue.curr_song = prev_songs.pop()

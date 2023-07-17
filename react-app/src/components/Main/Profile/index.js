@@ -2,6 +2,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useEffect, useState } from 'react';
 import { getUserSongsThunk } from '../../../store/songs';
 import ProfileSongCard from './ProfileSongCard';
+import OpenModalButton from '../../OpenModalButton';
+import "./Profile.css";
+import ProfileSettings from './ProfileSettings';
 
 export default function Profile () {
     const user = useSelector(state => state.session.user);
@@ -27,7 +30,12 @@ export default function Profile () {
 
     return (
         <div>
-            <h1>{user.username}</h1>
+            <div className='profile__top-div'>
+                <h1>{user?.username}</h1>
+                <OpenModalButton
+                    modalComponent={<ProfileSettings />}
+                    buttonText={"Settings"}/>
+            </div>
             <ul>
                 {songs.map(song => (
                     <li key={song.id}>
