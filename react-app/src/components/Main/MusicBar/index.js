@@ -4,7 +4,7 @@ import OpenModalButton from "../../OpenModalButton";
 import DisplayQueue from "./DisplayQueue";
 
 
-export default function MusicBar({ queue, paused, setPaused, currentSong, playedLength, audioEl, nextSong}) {
+export default function MusicBar({ queue, paused, setPaused, currentSong, playedLength, audioEl, nextSong, prevSong }) {
     const playedBar = useRef();
     const outerBar = useRef();
 
@@ -41,7 +41,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                 </div>
             </div>
             <div>
-                <button>Prev (not working)</button>
+                {queue.prevSongs.length ? <button onClick={prevSong}>Previous</button> : <button disabled={true} >No previous songs</button>}
                 <button
                     className="music-bar__play-button"
                     onClick={() => setPaused(!paused)}

@@ -7,7 +7,7 @@ import { getSongThunk } from "../../store/songs";
 import SongForm from "./SongForm";
 import NavBar from "./NavBar";
 import Search from "./Search";
-import { loadQueueThunk, playNextSongThunk } from "../../store/queue";
+import { loadQueueThunk, playNextSongThunk, playPrevSongThunk } from "../../store/queue";
 import Profile from "./Profile";
 
 export default function Main() {
@@ -49,7 +49,18 @@ export default function Main() {
             return
         }
         const res = await dispatch(playNextSongThunk());
-        console.log(res.payload.currSong);
+
+        const newSong = await dispatch(getSongThunk(res.payload.currSong));
+        setCurrentSong({})
+        setCurrentSong(newSong?.payload);
+        setPlayedLength(0);
+        setPaused(false);
+        audioEl.current.play();
+    }
+
+    const prevSong = async () => {
+        const res = await dispatch(playPrevSongThunk()); // thunk not made ye
+
         const newSong = await dispatch(getSongThunk(res.payload.currSong));
         setCurrentSong({})
         setCurrentSong(newSong?.payload);
@@ -107,6 +118,7 @@ export default function Main() {
                     audioEl={audioEl}
                     nextSong={nextSong}
                     queue={queue}
+                    prevSong={prevSong}
                     />
             </div>
         </div>

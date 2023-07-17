@@ -87,3 +87,26 @@ def set_next_songs():
     db.session.commit()
 
     return { "songs": new_next_songs_lst }
+
+
+@queue_routes.route("/prev")
+@login_required
+def prev_song():
+    queue = Queue.query.filter(Queue.user_id == current_user.id).one()
+
+    prev_songs = queue.prev_songs.split(",")
+
+    next_songs = [] if len(queue.next_songs) == 0 else queue.next_songs.split(",")
+    if len(next_songs) >= 10:
+        next_songs.pop()
+        next_songs.insert(0, queue.curr_song)
+    else:
+        next_songs.insert(0, queue.curr_song)
+
+    queue.curr_song = prev_songs.pop()
+    queue.next_songs = ",".join(str(v) for v in next_songs)
+    queue.prev_songs = ",".join(str(v) for v in prev_songs)
+
+    db.session.commit()
+
+    return queue.to_dict()
