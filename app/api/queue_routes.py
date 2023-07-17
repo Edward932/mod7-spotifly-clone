@@ -43,6 +43,9 @@ def add_song_next(songId):
 def next_song():
     queue = Queue.query.filter(Queue.user_id == current_user.id).one()
 
+    if len(queue.next_songs) == 0:
+        return queue.to_dict()
+
     next_songs = queue.next_songs.split(",")
 
     prev_songs = [] if len(queue.prev_songs) == 0 else queue.prev_songs.split(",")
