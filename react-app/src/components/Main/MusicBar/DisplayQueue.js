@@ -27,8 +27,19 @@ export default function DisplayQueue() {
     }
 
     const handleDelete = (index) => {
-        console.log(index)
         setNextSongs([...nextSongs.slice(0, index), ...nextSongs.slice(index + 1)])
+    }
+
+    const handleMoveForward = (index) => {
+        const newNextSongs = nextSongs.slice();
+        [newNextSongs[index], newNextSongs[index + 1]] = [newNextSongs[index + 1], newNextSongs[index]];
+        setNextSongs(newNextSongs);
+    }
+
+    const handleMoveBackward = (index) => {
+        const newNextSongs = nextSongs.slice();
+        [newNextSongs[index], newNextSongs[index - 1]] = [newNextSongs[index - 1], newNextSongs[index]];
+        setNextSongs(newNextSongs);
     }
 
     return (
@@ -56,8 +67,8 @@ export default function DisplayQueue() {
                             <p>Index: {i}</p>
                         </div>
                         <div>
-                            <button>Move up (not done)</button>
-                            <button>Move down (not done)</button>
+                            <button onClick={() => handleMoveForward(i)} disabled={i === nextSongs.length - 1}>Move forward</button>
+                            <button onClick={() => handleMoveBackward(i)} disabled={i == 0}>Move backward</button>
                             <button onClick={() => handleDelete(i)}>Delete</button>
                         </div>
                     </li>

@@ -2,7 +2,7 @@
 
 
 Revision ID: e35c7ba38a81
-Revises: 
+Revises:
 Create Date: 2023-07-14 13:17:29.223592
 
 """
