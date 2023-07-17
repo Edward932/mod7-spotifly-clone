@@ -33,7 +33,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
             <div className="music-bar__song-div">
                 <p>{currentSong?.name && `${currentSong.name} By: ${currentSong.owner.username}`|| 'No song selected'}</p>
                 <div className="music-bar__play-all">
-                    <p className="music-bar__timers">{playedTime}</p>
+                    <p className="music-bar__timers">{currentSong.id && playedTime}</p>
                     <div className="music-bar__play-bar-total"
                         ref={outerBar}
                         onClick={changeTime}
@@ -42,10 +42,10 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                             className="music-bar__play-bar-played"
                             ref={playedBar}
                         >
-                            <i class="fa-solid fa-circle"></i>
+                            <i className="fa-solid fa-circle"></i>
                         </div>
                     </div>
-                    <p className="music-bar__timers">{totalLength}</p>
+                    <p className="music-bar__timers">{currentSong.id && totalLength}</p>
                 </div>
                 <div>
                     <OpenModalButton
