@@ -58,9 +58,9 @@ function LoginFormPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              maxLength={50}
+              maxLength={40}
             />
-            {password.length >= 50 && <p>Max password length reached</p>}
+            {password.length >= 40 && <p>Max password length reached</p>}
           </label>
           <button type="submit">Log In</button>
         </form>
