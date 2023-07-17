@@ -9,16 +9,21 @@ function LoginFormPage() {
   const sessionUser = useSelector((state) => state.session.user);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [errors, setErrors] = useState([]);
+  const [errors, setErrors] = useState(null);
 
   if (sessionUser) return <Redirect to="/main" />;
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    if(!email.includes("@")) {
+      setErrors("Please provide a valid email with an @");
+      return;
+    }
+
+
     const data = await dispatch(login(email, password));
     if (data) {
-      setErrors(data);
-      console.log(data)
+      setErrors("Provided credentials were invalid");
     }
   };
 
@@ -26,15 +31,11 @@ function LoginFormPage() {
     <div className="login-form-page__outer">
       <div className="login-form-page__form-wrapper">
         <h1>Log In</h1>
+        {errors ? <p className="login-form-page__errors">{errors}</p> : <p className="login-form-page__errors"></p>}
         <form
           className="login-form-page__form"
           onSubmit={handleSubmit}
         >
-          <ul>
-            {errors.map((error, idx) => (
-              <li key={idx}>{error}</li>
-            ))}
-          </ul>
           <label>
             Email
             <input
@@ -52,7 +53,6 @@ function LoginFormPage() {
               onChange={(e) => setPassword(e.target.value)}
               required
             />
-            {errors.password && <p className="login-form-page__errors">{errors.password}</p>}
           </label>
           <button type="submit">Log In</button>
         </form>
