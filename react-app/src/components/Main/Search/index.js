@@ -8,12 +8,9 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
 
     const [search, setSearch] = useState("");
     const [type, setType] = useState("songs");
-    const [songArray, setSongArray] = useState(Object.values(songs))
+    const [songArray, setSongArray] = useState([])
 
     const dispatch = useDispatch();
-
-
-
 
     const handleSubmit = async(e) => {
         e.preventDefault();
@@ -28,12 +25,17 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
         setSongArray(Object.values(songs))
     }, [songs])
 
+
+    useEffect(() => {
+        setSongArray([])
+    }, []);
+
     return (
         <div>
             <form onSubmit={handleSubmit}>
                 <label>
                     <input
-                        placeholder="enter a song or artist name"
+                        placeholder="Enter a song or artist name"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
                     />
