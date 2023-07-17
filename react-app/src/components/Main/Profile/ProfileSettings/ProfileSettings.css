@@ -1,0 +1,11 @@
+.profile-settings__upper {
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-settings__outer {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}

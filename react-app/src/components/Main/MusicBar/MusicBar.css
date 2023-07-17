@@ -14,10 +14,33 @@
 
 .music-bar__play-bar-total {
     background-color: orange;
-    width: 70%;
+    width: 100%;
 }
 
 .music-bar__play-bar-played {
     background-color: blue;
     width: 0;
+}
+
+.music-bar__play-all {
+    display: grid;
+    grid-template-columns: 50px auto 50px;
+    width: 100%;
+    border: 2px solid purple;
+}
+
+.music-bar__timers {
+    width: 100%;
+    text-align: center;
+}
+
+.music-bar__play-bar-played {
+    display: flex;
+    justify-content: flex-end;
+    color: white;
+}
+
+.fa-circle {
+    margin-right: -5px;
+    color: black;
 }

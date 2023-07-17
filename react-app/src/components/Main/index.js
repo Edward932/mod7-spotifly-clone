@@ -19,6 +19,7 @@ export default function Main() {
 
     const [paused, setPaused] = useState(true);
     const [playedLength, setPlayedLength] = useState(0);
+    const [totalLength, setTotalLength] = useState("Loading...")
 
     const dispatch = useDispatch();
 
@@ -59,7 +60,11 @@ export default function Main() {
     }
 
     const prevSong = async () => {
-        const res = await dispatch(playPrevSongThunk()); // thunk not made ye
+        if(!queue.prevSongs.length) {
+            setPaused(true);
+            return
+        }
+        const res = await dispatch(playPrevSongThunk());
 
         const newSong = await dispatch(getSongThunk(res.payload.currSong));
         setCurrentSong({})
@@ -76,6 +81,13 @@ export default function Main() {
         const playedSoFar = audioEl.current.currentTime;
 
         setPlayedLength(playedSoFar / total);
+    }
+
+    const handleTotalTime = () => {
+        const total = Math.round(audioEl.current.duration);
+        const seconds = total % 60;
+        const minutes = total - seconds;
+        setTotalLength(`${minutes}:${seconds}`);
     }
 
     return (
@@ -104,11 +116,13 @@ export default function Main() {
             </div>
             <div className="main__outer-audio">
                 <audio
+                    preload="metadata"
                     src={currentSong?.aws_src}
                     ref={audioEl}
                     className="main__audio-player"
                     onTimeUpdate={changePlayBar}
                     onEnded={nextSong}
+                    onLoadedMetadata={handleTotalTime}
                 />
                 <MusicBar
                     paused={paused}
@@ -119,6 +133,7 @@ export default function Main() {
                     nextSong={nextSong}
                     queue={queue}
                     prevSong={prevSong}
+                    totalLength={totalLength}
                     />
             </div>
         </div>
