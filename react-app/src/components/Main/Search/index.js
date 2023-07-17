@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { searchSongsThunk } from "../../../store/songs";
 import SearchSongCard from "./SearchSongCard";
+import './Search.css';
 
 export default function Search({ setPlayedLength, setPaused, audioEl, setCurrentSong }) {
     const songs = useSelector(state => state.songs.searchSongs);
@@ -35,6 +36,7 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
             <form onSubmit={handleSubmit}>
                 <label>
                     <input
+                        className="search__input"
                         placeholder="Enter a song or artist name"
                         value={search}
                         onChange={(e) => setSearch(e.target.value)}
