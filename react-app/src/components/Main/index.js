@@ -110,7 +110,7 @@ export default function Main() {
                         <Profile />
                     </Route>
                     <Route>
-                        <div>upper</div>
+                        <div>Feed coming soon !</div>
                     </Route>
                 </Switch>
             </div>

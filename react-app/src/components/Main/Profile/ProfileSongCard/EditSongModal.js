@@ -77,7 +77,7 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
                 </label>
                 <p className="validation-error">{validationErrors.description}</p>
                 <button onClick={handleCancel}>Cancel</button>
-                <button type="submit">Upload Song</button>
+                <button type="submit">Update Song</button>
             </form>
         </div>
     )
