@@ -48,7 +48,7 @@ export default function DisplayQueue() {
             <div className="display-queue__current">
                 {currentSong.id ?
                     <>
-                        <p>Now playing:</p>
+                        <p>Now playing</p>
                         <p>Name: {currentSong.name}</p>
                         <p>Artist: {currentSong.owner.username}</p>
                         <p>description: {currentSong.description}</p>
@@ -64,7 +64,6 @@ export default function DisplayQueue() {
                         <div>
                             <p>{song.name} by {song.owner.username}</p>
                             <p>{song.description}</p>
-                            <p>Index: {i}</p>
                         </div>
                         <div>
                             <button onClick={() => handleMoveForward(i)} disabled={i === nextSongs.length - 1}>Move forward</button>

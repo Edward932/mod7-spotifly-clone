@@ -24,8 +24,8 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
     const readableTime = (total) => {
         const rounded = Math.round(total);
         const seconds = rounded % 60;
-        const minutes = rounded - seconds;
-        return `${minutes}:${seconds}`
+        const minutes = (rounded - seconds) / 60;
+        return `${minutes}:${seconds > 9 ? seconds : '0' + seconds}`
     }
 
     return (

@@ -33,6 +33,9 @@ function App() {
           <Route path="/main">
               {user ? <Main /> : <Redirect to="/" />}
           </Route>
+          <Route>
+            <Redirect to="/" />
+          </Route>
         </Switch>
       )}
     </>
