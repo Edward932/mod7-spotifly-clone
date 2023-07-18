@@ -12,21 +12,34 @@
     grid-template-columns: 15% 70% 15%;
 }
 
-.music-bar__play-bar-total {
-    background-color: orange;
+.music-bar__range {
+    appearance: none;
+    background: transparent;
+    cursor: pointer;
     width: 100%;
 }
 
-.music-bar__play-bar-played {
-    background-color: blue;
-    width: 0;
+.music-bar__range::-webkit-slider-runnable-track {
+    appearance: none;
+    background: var(--primary--gray);
+    height: 8px;
+    border-radius: 8px;
+}
+
+.music-bar__range::-webkit-slider-thumb {
+    appearance: none;
+    background-color: var(--primary-blue);
+    height: 15px;
+    width: 15px;
+    border-radius: 15px;
+    margin-top: -4px;
 }
 
 .music-bar__play-all {
     display: grid;
+    align-items: center;
     grid-template-columns: 50px auto 50px;
     width: 100%;
-    border: 2px solid purple;
 }
 
 .music-bar__timers {
@@ -85,4 +98,42 @@
     width: 100px;
     border-radius: 20px;
     color: white;
+}
+
+.music-bar__play-button {
+    color: darkgray;
+    font-size: 30px;
+}
+
+.music-bar__play-button:hover {
+    color: white;
+}
+
+.music-bar__play-button:active {
+    transform: translateY(4px);
+}
+
+.music-bar__next-on {
+    color: darkgray;
+    font-size: 20px;
+}
+
+.music-bar__next-on:hover {
+    color: white;
+}
+
+.music-bar__next-on:active {
+    transform: translateY(4px);
+}
+
+.music-bar__next-off {
+    font-size: 20px;
+    color: darkgray;
+}
+
+.music-bar__action-buttons {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
 }

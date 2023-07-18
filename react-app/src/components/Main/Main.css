@@ -1,6 +1,6 @@
 .main__outer-div {
     display: grid;
-    grid-template-rows: 93% 7%;
+    grid-template-rows: 90% 10%;
     height: 100%;
     background-color: black;
 }
