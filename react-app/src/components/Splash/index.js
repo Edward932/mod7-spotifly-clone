@@ -9,7 +9,7 @@ export default function Splash() {
             <div className="splash__top-nav">
                 <div className='splash__top-nav-home'>
                     <i class="fa-brands fa-spotify"></i>
-                    <p>Sound spot</p>
+                    <p>SoundSpot</p>
                 </div>
                 <Link
                     to="/login"
