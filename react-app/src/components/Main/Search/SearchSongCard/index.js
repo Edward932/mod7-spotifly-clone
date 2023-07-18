@@ -22,12 +22,14 @@ export default function SearchSongCard({ song, setPlayedLength, setPaused, audio
 
     return (
         <div className="search-song-card__outer">
-            <p>Name: {song.name}</p>
-            <p>Artist: {song.owner.username}</p>
-            <p>description: {song.description}</p>
-            <div>
-                <button onClick={handleAddQueue}>Add to que</button>
-                <button onClick={handlePlay}>Play</button>
+            <div className="search-song-card__title-div">
+                <p className="search-song-card__title">{song.name}</p>
+                <p className="search-song-card__auther">{song.owner.username}</p>
+            </div>
+            <p className="search-song-card__description">{song.description}</p>
+            <div className="search-song-card__buttons">
+                <i onClick={handleAddQueue}class="fa-solid fa-plus"></i>
+                <i onClick={handlePlay} className="fa-solid fa-circle-play"></i>
             </div>
         </div>
     )

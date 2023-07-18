@@ -49,7 +49,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                     </div>
                     <p className="music-bar__timers">{currentSong.id && totalLength}</p>
                 </div>
-                <div>
+                <div className="music-bar__queue">
                     <OpenModalButton
                         modalComponent={<DisplayQueue/>}
                         buttonText={"Edit Queue"}

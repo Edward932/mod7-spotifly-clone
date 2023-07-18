@@ -39,7 +39,7 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
     return (
         <div className="search__outer">
             <form className="search__form" onSubmit={handleSubmit}>
-                <label>
+                <div className="search__div">
                     <input
                         className="search__input"
                         placeholder="Enter a song or artist name"
@@ -47,8 +47,8 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
                         onChange={(e) => setSearch(e.target.value)}
                         maxLength={255}
                     />
-                    <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
-                </label>
+                    <button className="search__submit" type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
+                </div>
                 <div className="search__types">
                     <button
                         className={type === "songs" ? "search__radio-active" : "search__radio"}
@@ -67,8 +67,9 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
                     </button>
                 </div>
             </form>
-            <div>
-                <ul>
+            <div className="search__list-div">
+                <div className="search__column-headers"><p>Title</p><p>Description</p></div>
+                <ul className="search__list">
                     {songArray.map(song => (
                         <li key={song.id}>
                             <SearchSongCard

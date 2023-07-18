@@ -6,10 +6,13 @@
     padding: 20px;
     border: none;
     color: white;
+    font-size: 15px;
+    padding-right: 40px;
 }
 
-.search__outer {
-
+.search__div {
+    display: flex;
+    align-items: center;
 }
 
 .search__form {
@@ -17,6 +20,10 @@
     flex-direction: column;
     align-items: flex-start;
     gap: 20px;
+    border: 2px solid red;
+    position: sticky;
+    top: 20px;
+    background-color: none;
 }
 
 .search__radio {
@@ -43,4 +50,33 @@
 .search__types {
     display: flex;
     gap: 10px;
+}
+
+.search__submit {
+    font-size: 20px;
+    background: none;
+    border: none;
+    color: lightgray;
+    margin-left: -30px;
+}
+
+.search__submit i:hover {
+    color: white;
+}
+
+
+.search__column-headers {
+    display: grid;
+    grid-template-columns: 1fr 2fr ;
+    margin-top: 20px;
+}
+
+.search__list {
+    overflow: hidden;
+}
+
+.search__list-div {
+    border: 2px solid orange;
+    overflow: hidden;
+    margin-top: 30px;
 }
