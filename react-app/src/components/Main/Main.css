@@ -25,3 +25,14 @@
     color: white;
     overflow-y: scroll;
 }
+
+.main__content::-webkit-scrollbar {
+    background: none;
+    width: 5px;
+
+}
+
+.main__content::-webkit-scrollbar-thumb {
+    background-color: black;
+    border-radius: 5px;
+}
