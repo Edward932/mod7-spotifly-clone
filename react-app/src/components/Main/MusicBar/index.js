@@ -31,7 +31,9 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
     return (
         <div className="music-bar__outer-div">
             <div className="music-bar__song-div">
-                <p>{currentSong?.name && `${currentSong.name} By: ${currentSong.owner.username}`|| 'No song selected'}</p>
+                <div className="music-bar__title-div">
+                    {currentSong?.name ? <><p className="music-bar__title">{currentSong.name}</p><p className="music-bar__by">{currentSong.owner.username}</p></> : <p className="music-bar__title">No song selected</p>}
+                </div>
                 <div className="music-bar__play-all">
                     <p className="music-bar__timers">{currentSong.id && playedTime}</p>
                     <div className="music-bar__play-bar-total"
@@ -47,7 +49,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                     </div>
                     <p className="music-bar__timers">{currentSong.id && totalLength}</p>
                 </div>
-                <div>
+                <div className="music-bar__queue">
                     <OpenModalButton
                         modalComponent={<DisplayQueue/>}
                         buttonText={"Edit Queue"}

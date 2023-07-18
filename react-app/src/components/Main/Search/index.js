@@ -31,10 +31,15 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
         setSongArray([])
     }, []);
 
+    const handleType = (e) => {
+        e.preventDefault();
+        setType(e.target.value)
+    }
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
-                <label>
+        <div className="search__outer">
+            <form className="search__form" onSubmit={handleSubmit}>
+                <div className="search__div">
                     <input
                         className="search__input"
                         placeholder="Enter a song or artist name"
@@ -42,34 +47,29 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
                         onChange={(e) => setSearch(e.target.value)}
                         maxLength={255}
                     />
-                </label>
-                <div>
-                    Search for:
-                    <label>
-                        Songs
-                        <input
-                            type="radio"
-                            name="search-type"
-                            value="songs"
-                            checked={type === "songs"}
-                            onChange={(e) => setType(e.target.value)}
-                        />
-                    </label>
-                    <label>
-                        Artists
-                        <input
-                            type="radio"
-                            name="search-type"
-                            value="artists"
-                            checked={type === "artists"}
-                            onChange={(e) => setType(e.target.value)}
-                        />
-                    </label>
+                    <button className="search__submit" type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
                 </div>
-                <button type="submit">Search</button>
+                <div className="search__types">
+                    <button
+                        className={type === "songs" ? "search__radio-active" : "search__radio"}
+                        onClick={(e) => handleType(e)}
+                        value="songs"
+
+                    >
+                        Songs
+                    </button>
+                    <button
+                        className={type === "artists" ? "search__radio-active" : "search__radio"}
+                        onClick={(e) => handleType(e)}
+                        value="artists"
+                    >
+                        Artists
+                    </button>
+                </div>
             </form>
-            <div>
-                <ul>
+            <div className="search__list-div">
+                <div className="search__column-headers"><p>Title</p><p>Description</p></div>
+                <ul className="search__list">
                     {songArray.map(song => (
                         <li key={song.id}>
                             <SearchSongCard

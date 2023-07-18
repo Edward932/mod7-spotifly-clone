@@ -3,13 +3,13 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    color: white;
 }
 
 .music-bar__song-div {
-    display: flex;
     width: 100%;
-    align-items: flex-start;
-    gap: 10%;
+    display: grid;
+    grid-template-columns: 15% 70% 15%;
 }
 
 .music-bar__play-bar-total {
@@ -43,4 +43,46 @@
 .fa-circle {
     margin-right: -5px;
     color: black;
+}
+
+.music-bar__title {
+    font-size: 20px;
+    font-weight: 200;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(90%);
+}
+
+.music-bar__by {
+    font-size: 15px;
+    font-weight: 200;
+    color: lightgray;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(90%);
+}
+
+.music-bar__title-div {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+}
+
+.music-bar__queue {
+    display: flex;
+    align-items: center;
+    justify-self: center;
+}
+
+.music-bar__queue button{
+    background-color: var(--primary-blue);
+    border: none;
+    height: 30px;
+    width: 100px;
+    border-radius: 20px;
+    color: white;
 }
