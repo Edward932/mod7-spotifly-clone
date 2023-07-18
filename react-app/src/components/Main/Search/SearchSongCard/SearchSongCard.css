@@ -50,3 +50,7 @@
 .search-song-card__buttons i:hover {
     color: var(--primary-green-h)
 }
+
+.search-song-card__buttons i:active {
+    transform: translateY(4px);
+}

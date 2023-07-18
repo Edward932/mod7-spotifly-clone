@@ -62,6 +62,9 @@ def search_songs():
     search_name = request.args.get('name')
     songs = Song.query.filter(Song.name.ilike(f"%{search_name}%")).all()
 
+    if len(songs) == 0:
+        pass
+
     return [ song.to_dict() for song in songs ]
 
 

@@ -5,19 +5,19 @@ import DisplayQueue from "./DisplayQueue";
 
 
 export default function MusicBar({ queue, paused, setPaused, currentSong, playedLength, audioEl, nextSong, prevSong, totalLength}) {
-    const playedBar = useRef();
-    const outerBar = useRef();
 
     const [playedTime, setPlayedTime] = useState('0:0');
 
+    const range = useRef();
+
     useEffect(() => {
-        playedBar.current.style.setProperty('width', `${playedLength * 100}%`);
-        setPlayedTime(readableTime(audioEl.current.currentTime))
+        setPlayedTime(readableTime(audioEl.current.currentTime));
+        range.current.value = playedLength;
     }, [playedLength]);
 
     const changeTime = (e) => {
         if(!currentSong?.id) return;
-        const newPercent =  e.nativeEvent.offsetX / outerBar.current.clientWidth;
+        const newPercent =  e.target.value;
         audioEl.current.currentTime = newPercent * audioEl.current.duration;
     }
 
@@ -36,17 +36,16 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                 </div>
                 <div className="music-bar__play-all">
                     <p className="music-bar__timers">{currentSong.id && playedTime}</p>
-                    <div className="music-bar__play-bar-total"
-                        ref={outerBar}
-                        onClick={changeTime}
-                    >
-                        <div
-                            className="music-bar__play-bar-played"
-                            ref={playedBar}
-                        >
-                            <i className="fa-solid fa-circle"></i>
-                        </div>
-                    </div>
+                    <input
+                        className="music-bar__range"
+                        type="range"
+                        value={playedLength}
+                        ref={range}
+                        min={0}
+                        step={0.01}
+                        max={1}
+                        onChange={changeTime}
+                    />
                     <p className="music-bar__timers">{currentSong.id && totalLength}</p>
                 </div>
                 <div className="music-bar__queue">
@@ -56,18 +55,16 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                     />
                 </div>
             </div>
-            <div>
-                {queue.prevSongs.length ? <button onClick={prevSong}>Previous</button> : <button disabled={true} >No previous songs</button>}
-                <button
-                    className="music-bar__play-button"
+            {currentSong.id && <div className="music-bar__action-buttons">
+                {queue.prevSongs.length ? <i onClick={prevSong} class="music-bar__next-on fa-solid fa-backward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
+                <i
                     onClick={() => setPaused(!paused)}
                     disabled={!currentSong?.id}
+                    className={paused ? "music-bar__play-button fa-solid fa-circle-play" : "music-bar__play-button fa-solid fa-circle-pause"}
                 >
-                    {paused ? "play" : "pause"}
-                </button>
-                {queue.nextSongs.length ? <button onClick={nextSong}>Next</button> : <button disabled={true} >No songs in queue</button>}
-            </div>
-
+                </i>
+                {queue.nextSongs.length ? <i onClick={nextSong} class="music-bar__next-on fa-solid fa-forward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
+            </div>}
         </div>
     )
 }
