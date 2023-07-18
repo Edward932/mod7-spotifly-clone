@@ -1,7 +1,38 @@
 .splash__top-nav {
     display: flex;
     justify-content: space-between;
-    border: 2px solid orange;
+    background-color: black;
+    color:white;
+    align-items: center;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.splash__top-nav-link {
+    color: black;
+    background-color: var(--primary-green);
+    height: 70%;
+    width: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 20px;
+    text-decoration: none;
+}
+
+.fa-spotify {
+    font-size: 25px;
+}
+
+.splash__top-nav-home {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.splash__top-nav-link:hover {
+    background-color: var(--primary-green-h);
 }
 
 .splash__main {
@@ -10,7 +41,23 @@
     align-items: center;
     gap: 30px;
     padding-top: 200px;
-    border: 2px solid blue;
+    color: white;
+    background: linear-gradient(-45deg, var(--primary-red),  var(--primary-blue), var(--primary-green));
+    background-size: 500%;
+    animation: background-transition 20s infinite;
+    height: 100%;
+}
+
+@keyframes background-transition {
+    0% {
+		background-position: 0% 0%;
+	}
+	50% {
+		background-position: 100% 100%;
+	}
+    100% {
+        background-position: 0% 0%;
+    }
 }
 
 .splash__bottom-links {
@@ -27,4 +74,30 @@
 .splash__main-buttons {
     display: flex;
     gap: 50px;
+}
+
+.splash__main-links {
+    color: white;
+    text-decoration: none;
+    background-color: black;
+    height: 30px;
+    width: 150px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.splash__main-links:hover {
+    background-color: rgb(39, 39, 39);
+}
+
+.splash__main-description {
+    width: 500px;
+    text-align: center;
+}
+
+.splash__main h1 {
+    font-size: 80px;
+    font-weight: 100;
 }

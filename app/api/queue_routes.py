@@ -97,6 +97,9 @@ def set_next_songs():
 def prev_song():
     queue = Queue.query.filter(Queue.user_id == current_user.id).one()
 
+    if len(queue.prev_songs) == 0:
+        return queue.to_dict()
+
     prev_songs = queue.prev_songs.split(",")
 
     next_songs = [] if len(queue.next_songs) == 0 else queue.next_songs.split(",")

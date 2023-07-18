@@ -7,15 +7,23 @@ export default function Splash() {
     return (
         <div className="splash__outer">
             <div className="splash__top-nav">
-                <p>(ADD LOGO) Sound spot</p>
-                <Link to="/login">Login</Link>
+                <div className='splash__top-nav-home'>
+                    <i class="fa-brands fa-spotify"></i>
+                    <p>Sound spot</p>
+                </div>
+                <Link
+                    to="/login"
+                    className="splash__top-nav-link"
+                >
+                    Login
+                </Link>
             </div>
             <div className="splash__main">
                 <h1>SoundSpot</h1>
-                <p>Description ....</p>
+                <p className='splash__main-description'>SoundSpot is a digital music, podcast, and video service that gives you access to millions of songs and other content from creators all over the world.</p>
                 <div className="splash__main-buttons">
-                    <Link to="/login">Login</Link>
-                    <Link to="/signup">Sign up</Link>
+                    <Link className="splash__main-links" to="/login">Login</Link>
+                    <Link className="splash__main-links" to="/signup">Sign up</Link>
                 </div>
             </div>
             <div className="splash__bottom-links">
