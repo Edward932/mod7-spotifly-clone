@@ -36,7 +36,7 @@ function SignupFormPage() {
       <div className="signup-form-page__form-wrapper">
         <h1>Sign Up</h1>
         <form className="signup-form-page__form" onSubmit={handleSubmit}>
-          <ul>
+          <ul className="signup-form-page__ul">
             {errors.map((error, idx) => <li className="signup-form-page__errors" key={idx}>{error}</li>)}
           </ul>
           <label>
@@ -87,7 +87,7 @@ function SignupFormPage() {
             />
           </label>
           {confirmPassword.length >= 255 && <p>Max password length reached</p>}
-          <button type="submit">Sign Up</button>
+          <button className="signup-form-page__button" type="submit">Sign Up</button>
         </form>
       </div>
     </div>
