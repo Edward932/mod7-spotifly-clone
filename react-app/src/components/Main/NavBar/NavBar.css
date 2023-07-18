@@ -1,10 +1,29 @@
 .nav-bar__outer-div {
-    border: 2px solid red;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    align-items: center;
+    gap: 40px;
+    background-color: rgb(50 50 50);
+    color: white;
+    padding: 10px;
+    margin: 5px;
+    border-radius: 10px;
+    font-size: 30px;
+    padding-top: 25px;
 }
 
 .nav-bar__outer-div a.active {
-    color: red;
+    color: var(--primary-green);
+}
+
+.nav-bar__outer-div a.active:hover {
+    color: var(--primary-green-h)
+}
+
+.nav-bar__outer-div a {
+    color: darkgray;
+}
+
+.nav-bar__outer-div a:hover {
+    color: white;
 }

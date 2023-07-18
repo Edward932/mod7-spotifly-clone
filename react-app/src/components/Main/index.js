@@ -21,6 +21,8 @@ export default function Main() {
     const [playedLength, setPlayedLength] = useState(0);
     const [totalLength, setTotalLength] = useState("Loading...")
 
+    const audioEl = useRef();
+
     const dispatch = useDispatch();
 
     useEffect(() => {
@@ -74,8 +76,6 @@ export default function Main() {
         audioEl.current.play();
     }
 
-    const audioEl = useRef();
-
     const changePlayBar = () => {
         const total = audioEl.current.duration;
         const playedSoFar = audioEl.current.currentTime;
@@ -94,25 +94,27 @@ export default function Main() {
         <div className="main__outer-div">
             <div className="main__main-div">
                 <NavBar />
-                <Switch>
-                    <Route path="/main/song-form">
-                        <SongForm />
-                    </Route>
-                    <Route path="/main/search">
-                        <Search
-                            setPlayedLength={setPlayedLength}
-                            setPaused={setPaused}
-                            audioEl={audioEl}
-                            setCurrentSong={setCurrentSong}
-                        />
-                    </Route>
-                    <Route path="/main/profile">
-                        <Profile />
-                    </Route>
-                    <Route>
-                        <div>Feed coming soon !</div>
-                    </Route>
-                </Switch>
+                <div className="main__content">
+                    <Switch>
+                        <Route path="/main/song-form">
+                            <SongForm />
+                        </Route>
+                        <Route path="/main/search">
+                            <Search
+                                setPlayedLength={setPlayedLength}
+                                setPaused={setPaused}
+                                audioEl={audioEl}
+                                setCurrentSong={setCurrentSong}
+                            />
+                        </Route>
+                        <Route path="/main/profile">
+                            <Profile />
+                        </Route>
+                        <Route>
+                            <div>Feed coming soon !</div>
+                        </Route>
+                    </Switch>
+                </div>
             </div>
             <div className="main__outer-audio">
                 <audio

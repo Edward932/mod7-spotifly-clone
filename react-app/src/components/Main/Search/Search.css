@@ -1,3 +1,46 @@
 .search__input {
-    width: 300px;
+    width: 400px;
+    background-color: var(--primary--gray);
+    height: 40px;
+    border-radius: 20px;
+    padding: 20px;
+    border: none;
+    color: white;
+}
+
+.search__outer {
+
+}
+
+.search__form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.search__radio {
+    background-color: var(--primary--gray);
+    height: 30px;
+    width: 80px;
+    border: none;
+    color: white;
+    border-radius: 20px;
+}
+
+.search__radio:hover {
+    background-color: rgb(70 70 70);
+}
+
+.search__radio-active {
+    background-color: white;
+    height: 30px;
+    width: 80px;
+    border: none;
+    border-radius: 20px;
+}
+
+.search__types {
+    display: flex;
+    gap: 10px;
 }

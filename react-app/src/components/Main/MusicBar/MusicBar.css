@@ -3,6 +3,7 @@
     flex-direction: column;
     align-items: center;
     width: 100%;
+    color: white;
 }
 
 .music-bar__song-div {
@@ -43,4 +44,15 @@
 .fa-circle {
     margin-right: -5px;
     color: black;
+}
+
+.music-bar__title {
+    font-size: 20px;
+    font-weight: 200;
+}
+
+.music-bar__by {
+    font-size: 15px;
+    font-weight: 200;
+    color: lightgray;
 }

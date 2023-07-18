@@ -31,9 +31,14 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
         setSongArray([])
     }, []);
 
+    const handleType = (e) => {
+        e.preventDefault();
+        setType(e.target.value)
+    }
+
     return (
-        <div>
-            <form onSubmit={handleSubmit}>
+        <div className="search__outer">
+            <form className="search__form" onSubmit={handleSubmit}>
                 <label>
                     <input
                         className="search__input"
@@ -42,31 +47,25 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
                         onChange={(e) => setSearch(e.target.value)}
                         maxLength={255}
                     />
+                    <button type="submit"><i className="fa-solid fa-magnifying-glass"></i></button>
                 </label>
-                <div>
-                    Search for:
-                    <label>
+                <div className="search__types">
+                    <button
+                        className={type === "songs" ? "search__radio-active" : "search__radio"}
+                        onClick={(e) => handleType(e)}
+                        value="songs"
+
+                    >
                         Songs
-                        <input
-                            type="radio"
-                            name="search-type"
-                            value="songs"
-                            checked={type === "songs"}
-                            onChange={(e) => setType(e.target.value)}
-                        />
-                    </label>
-                    <label>
+                    </button>
+                    <button
+                        className={type === "artists" ? "search__radio-active" : "search__radio"}
+                        onClick={(e) => handleType(e)}
+                        value="artists"
+                    >
                         Artists
-                        <input
-                            type="radio"
-                            name="search-type"
-                            value="artists"
-                            checked={type === "artists"}
-                            onChange={(e) => setType(e.target.value)}
-                        />
-                    </label>
+                    </button>
                 </div>
-                <button type="submit">Search</button>
             </form>
             <div>
                 <ul>

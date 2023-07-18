@@ -2,16 +2,25 @@
     display: grid;
     grid-template-rows: 93% 7%;
     height: 100%;
-    border: 2px solid blue;
+    background-color: black;
 }
 
-
 .main__outer-audio {
-    border: 2px solid green;
+    padding-left: 20px;
+    padding-right: 20px;
 }
 
 .main__main-div {
     display: grid;
-    grid-template-columns: 10% 90%;
+    grid-template-columns: 80px 1fr;
+    margin-right: 5px;
+    margin-left: 5px;
+}
 
+.main__content {
+    background: linear-gradient(rgb(50, 120, 61), 10%, rgb(50 50 50) 70%);
+    padding: 20px;
+    border-radius: 10px;
+    margin: 5px;
+    color: white;
 }
