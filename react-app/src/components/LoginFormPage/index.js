@@ -34,7 +34,7 @@ function LoginFormPage() {
   return (
     <div className="login-form-page__outer">
       <div className="login-form-page__form-wrapper">
-        <h1>Log In</h1>
+        <h1>Log in to SoundSpot</h1>
         {errors ? <p className="login-form-page__errors">{errors}</p> : <p className="login-form-page__errors"></p>}
         <form
           className="login-form-page__form"
@@ -62,9 +62,9 @@ function LoginFormPage() {
             />
             {password.length >= 40 && <p>Max password length reached</p>}
           </label>
-          <button type="submit">Log In</button>
+          <button className="login-form-page__login" type="submit">Log In</button>
         </form>
-        <button onClick={handleDemo}>Login as Demo</button>
+        <button className="login-form-page__demo" onClick={handleDemo}>Login as Demo</button>
       </div>
     </div>
   );
