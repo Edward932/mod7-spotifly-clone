@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { useModal } from "../../../../context/Modal"
 import { updateSongThunk } from '../../../../store/songs';
+import './EditSongModal.css';
 
 
 export default function EditSongModal({ song, setNewDelete, newDelete }) {
@@ -40,16 +41,18 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
     }
 
     return (
-        <div>
+        <div className='edit-song-modal__outer'>
             <h1>Update song</h1>
             {loading && <h3>Updating song ...</h3>}
             <form
+                className='edit-song-form__form'
                 onSubmit={handleEdit}
                 encType='multipart/form-data'
             >
                 <label>
                 Song Name
                     <input
+                        className='edit-song-form__input'
                         value={songName}
                         onChange={(e) => setSongName(e.target.value)}
                         maxLength={50}
@@ -61,6 +64,7 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
                 <label>
                     New audio file (optional)
                     <input
+                        className='edit-song-form__file'
                         type="file"
                         accept="audio/*"
                         onChange={(e) => {setSongData(e.target.files[0])}}
@@ -70,6 +74,7 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
                 <label>
                     Song Description
                     <input
+                        className='edit-song-form__input'
                         value={description}
                         onChange={(e) => setDescription(e.target.value)}
                         maxLength={100}
@@ -78,8 +83,10 @@ export default function EditSongModal({ song, setNewDelete, newDelete }) {
                     {description.length >= 100 && <p>Song description max length reached</p>}
                 </label>
                 <p className="validation-error">{validationErrors.description}</p>
-                <button onClick={handleCancel}>Cancel</button>
-                <button type="submit">Update Song</button>
+                <div className='edit-song-form__buttons'>
+                    <button onClick={handleCancel}>Cancel</button>
+                    <button type="submit">Update Song</button>
+                </div>
             </form>
         </div>
     )

@@ -1,0 +1,71 @@
+.edit-song-modal__outer {
+    padding: 30px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 15px;
+    background-color: var(--primary-blue);
+    border-radius: 20px;
+    margin: -20px;
+    color: white;
+    width: 500px;
+}
+
+.edit-song-modal__outer h1 {
+    font-size: 40px;
+    font-weight: 100;
+}
+
+.edit-song-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 75%;
+}
+
+.edit-song-form__input {
+    height: 30px;
+    border: none;
+    border-radius: 25px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.edit-song-form__form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.edit-song-form__file::file-selector-button {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: lightgray;
+    margin-right: 20px;
+}
+
+.edit-song-form__file::file-selector-button:hover {
+    background-color: white;
+}
+
+
+.edit-song-form__buttons {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.edit-song-form__buttons button {
+    width: 100px;
+    height: 30px;
+    background-color: lightgray;
+    border: none;
+    border-radius: 30px;
+}
+
+.edit-song-form__buttons button:hover {
+    background-color: white;
+}
