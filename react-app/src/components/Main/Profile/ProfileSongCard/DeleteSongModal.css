@@ -1,52 +1,55 @@
-.profile-settings__upper {
-    display: flex;
-    flex-direction: column;
-}
-
-.profile-settings__outer {
+.delete-song-modal__outer {
     padding: 30px;
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 15px;
     background-color: var(--primary-blue);
     border-radius: 20px;
     margin: -20px;
-}
-
-.profile-settings__outer p {
-    font-size: 30px;
     color: white;
 }
 
-.profile-settings__lower {
+.delete-song-modal__title {
+    font-size: 30px;
+}
+
+.delete-song-model__warning {
+    font-size: 20px;
+    font-weight: 100;
+}
+
+.delete-song-modal__button-div {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    width: 100%;
     gap: 35px;
 }
 
-.profile-settings__lower button {
+.delete-song-modal__button-div button {
     height: 30px;
     width: 75px;
     border: none;
     border-radius: 20px;
+    margin-top: 5px;
 }
 
-.profile-settings__close {
+.delete-song-modal__close {
     background-color: lightgray;
 }
 
-.profile-settings__close:hover {
+.delete-song-modal__close:hover {
     background-color: white;
 }
 
-.profile-settings__logout {
+.delete-song-modal__delete {
     background-color: var(--primary-red);
     color: white;
 }
 
-.profile-settings__logout:hover {
+.delete-song-modal__delete:hover {
     background-color: var(--primary-red-h);
     color: white;
 }

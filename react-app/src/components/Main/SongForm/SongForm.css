@@ -1,3 +1,85 @@
 .validation-error {
     color: red;
 }
+
+.song-form__outer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    justify-content: center;
+}
+
+.song-form__form-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    align-items: center;
+}
+
+.song-form__form label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.song-form__form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 75%;
+}
+
+.song-form__input {
+    height: 30px;
+    border: none;
+    border-radius: 25px;
+    background-color: black;
+    color: white;
+    padding-left: 20px;
+    padding-right: 20px;
+}
+
+.song-form__outer h1 {
+    font-size: 45px;
+    font-weight: 100;
+}
+
+.song-form__button {
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.song-form__button:hover {
+    background-color: var(--primary-blue-h);
+}
+
+.song-form__button-div {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+}
+
+.song-form__file::file-selector-button {
+    width: 100px;
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-blue);
+    color: white;
+    margin-right: 20px;
+}
+
+.song-form__file::file-selector-button:hover {
+    background-color: var(--primary-blue-h);
+}
+
+.song-form__maxlen {
+    margin-top: 5px;
+}
