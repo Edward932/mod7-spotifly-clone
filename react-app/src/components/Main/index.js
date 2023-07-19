@@ -124,8 +124,11 @@ export default function Main() {
                         <Route path="/main/profile">
                             <Profile />
                         </Route>
+                        <Route path="/main/popular">
+                            <div>Popular coming soon!</div>
+                        </Route>
                         <Route>
-                            <div>Feed coming soon !</div>
+                            <div>Feed coming soon!</div>
                         </Route>
                     </Switch>
                 </div>
