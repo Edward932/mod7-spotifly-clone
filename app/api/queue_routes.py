@@ -55,7 +55,13 @@ def next_song():
     if queue.curr_song is not None:
         prev_songs.append(queue.curr_song)
 
-    queue.curr_song = next_songs.pop(0)
+    next_song_id = next_songs.pop(0)
+    song = Song.query.filter(Song.id == next_song_id).one_or_none()
+    if song is None:
+        queue.curr_song = None
+    else:
+        queue.curr_song = next_song_id
+
     queue.next_songs = ",".join(str(v) for v in next_songs)
     queue.prev_songs = ",".join(str(v) for v in prev_songs)
 
@@ -74,7 +80,9 @@ def get_next_songs():
 
     song_dct = { song.id: song.to_dict() for song in songs }
 
-    return { "songs": [ song_dct[int(num_str)] for num_str in next_songs_lst ]}
+    songs_lst = [ song_dct.get(int(num_str), None) for num_str in next_songs_lst if song_dct.get(int(num_str), None) is not None]
+
+    return { "songs": songs_lst }
 
 
 @queue_routes.route("/next", methods=["POST"])
@@ -109,7 +117,14 @@ def prev_song():
     if queue.curr_song is not None:
         next_songs.insert(0, queue.curr_song)
 
-    queue.curr_song = prev_songs.pop()
+
+    prev_song_id = prev_songs.pop()
+    song = Song.query.filter(Song.id == prev_song_id).one_or_none()
+    if song is None:
+        queue.curr_song = None
+    else:
+        queue.curr_song = prev_song_id
+
     queue.next_songs = ",".join(str(v) for v in next_songs)
     queue.prev_songs = ",".join(str(v) for v in prev_songs)
 

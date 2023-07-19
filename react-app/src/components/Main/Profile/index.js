@@ -31,13 +31,13 @@ export default function Profile () {
     return (
         <div>
             <div className='profile__top-div'>
-                <h1>{user?.username}</h1>
+                <h1><i class="fa-regular fa-user"></i> {user?.username}</h1>
                 <OpenModalButton
                     modalComponent={<ProfileSettings />}
                     buttonText={"Settings"}/>
             </div>
             <ul>
-                {songs.length === 0 && "You have not uploaded any songs."}
+                {songs.length === 0 ? "You have not uploaded any songs." : <div className="profile__column-headers"><p>Title</p><p>Description</p></div>}
                 {songs.map(song => (
                     <li key={song.id}>
                         <ProfileSongCard song={song} setNewDelete={setNewDelete} newDelete={newDelete} />

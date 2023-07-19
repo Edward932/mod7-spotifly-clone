@@ -4,8 +4,48 @@
 }
 
 .profile-settings__outer {
-    padding: 20px;
+    padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 25px;
+    gap: 15px;
+    background-color: var(--primary-blue);
+    border-radius: 20px;
+    margin: -20px;
+}
+
+.profile-settings__outer p {
+    font-size: 30px;
+    color: white;
+}
+
+.profile-settings__lower {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.profile-settings__lower button {
+    height: 30px;
+    width: 75px;
+    border: none;
+    border-radius: 20px;
+}
+
+.profile-settings__close {
+    background-color: lightgray;
+}
+
+.profile-settings__close:hover {
+    background-color: white;
+}
+
+.profile-settings__logout {
+    background-color: var(--primary-red);
+    color: white;
+}
+
+.profile-settings__logout:hover {
+    background-color: var(--primary-red-h);
+    color: white;
 }

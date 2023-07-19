@@ -27,6 +27,7 @@ export default function Main() {
 
     useEffect(() => {
         (async () => {
+            console.log("INN USE EFFECT", songId === null)
             if (songId === null) return;
             const newSong = await dispatch(getSongThunk(songId));
             setCurrentSong(newSong?.payload);
@@ -53,6 +54,13 @@ export default function Main() {
         }
         const res = await dispatch(playNextSongThunk());
 
+        if (res.payload.currSong === null) {
+            setCurrentSong({});
+            setPlayedLength(0);
+            setPaused(true);
+            return;
+        }
+
         const newSong = await dispatch(getSongThunk(res.payload.currSong));
         setCurrentSong({})
         setCurrentSong(newSong?.payload);
@@ -67,6 +75,13 @@ export default function Main() {
             return
         }
         const res = await dispatch(playPrevSongThunk());
+
+        if (res.payload.currSong === null) {
+            setCurrentSong({});
+            setPlayedLength(0);
+            setPaused(true);
+            return;
+        }
 
         const newSong = await dispatch(getSongThunk(res.payload.currSong));
         setCurrentSong({})
