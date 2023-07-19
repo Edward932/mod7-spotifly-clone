@@ -27,7 +27,6 @@ export default function Main() {
 
     useEffect(() => {
         (async () => {
-            console.log("INN USE EFFECT", songId === null)
             if (songId === null) return;
             const newSong = await dispatch(getSongThunk(songId));
             setCurrentSong(newSong?.payload);
