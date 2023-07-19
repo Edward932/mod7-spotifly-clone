@@ -30,10 +30,10 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
 
     return (
         <div className="music-bar__outer-div">
+            <div className="music-bar__title-div">
+                {currentSong?.name ? <><p className="music-bar__title">{currentSong.name}</p><p className="music-bar__by">{currentSong.owner.username}</p></> : <p className="music-bar__title">No song selected</p>}
+            </div>
             <div className="music-bar__song-div">
-                <div className="music-bar__title-div">
-                    {currentSong?.name ? <><p className="music-bar__title">{currentSong.name}</p><p className="music-bar__by">{currentSong.owner.username}</p></> : <p className="music-bar__title">No song selected</p>}
-                </div>
                 <div className="music-bar__play-all">
                     <p className="music-bar__timers">{currentSong.id && playedTime}</p>
                     <input
@@ -48,23 +48,24 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                     />
                     <p className="music-bar__timers">{currentSong.id && totalLength}</p>
                 </div>
-                <div className="music-bar__queue">
-                    <OpenModalButton
-                        modalComponent={<DisplayQueue/>}
-                        buttonText={"Edit Queue"}
-                    />
-                </div>
+                {currentSong.id && <div className="music-bar__action-buttons">
+                    {queue.prevSongs.length ? <i onClick={prevSong} class="music-bar__next-on fa-solid fa-backward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
+                    <i
+                        onClick={() => setPaused(!paused)}
+                        disabled={!currentSong?.id}
+                        className={paused ? "music-bar__play-button fa-solid fa-circle-play" : "music-bar__play-button fa-solid fa-circle-pause"}
+                    >
+                    </i>
+                    {queue.nextSongs.length ? <i onClick={nextSong} class="music-bar__next-on fa-solid fa-forward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
+                </div>}
+
             </div>
-            {currentSong.id && <div className="music-bar__action-buttons">
-                {queue.prevSongs.length ? <i onClick={prevSong} class="music-bar__next-on fa-solid fa-backward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
-                <i
-                    onClick={() => setPaused(!paused)}
-                    disabled={!currentSong?.id}
-                    className={paused ? "music-bar__play-button fa-solid fa-circle-play" : "music-bar__play-button fa-solid fa-circle-pause"}
-                >
-                </i>
-                {queue.nextSongs.length ? <i onClick={nextSong} class="music-bar__next-on fa-solid fa-forward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
-            </div>}
+            <div className="music-bar__queue">
+                <OpenModalButton
+                    modalComponent={<DisplayQueue/>}
+                    buttonText={"Edit Queue"}
+                />
+            </div>
         </div>
     )
 }
