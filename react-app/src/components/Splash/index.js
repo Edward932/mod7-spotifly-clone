@@ -27,7 +27,16 @@ export default function Splash() {
                 </div>
             </div>
             <div className="splash__bottom-links">
-                bottom links
+                <div>
+                    <p>Github link</p>
+                    <p>Linkden link</p>
+                </div>
+                <div>
+                    List of technology used (ALL OF THESE ARE DEAD LINK FOR NOW)
+                </div>
+                <div>
+                    <p>Link to repository</p>
+                </div>
             </div>
         </div>
     )

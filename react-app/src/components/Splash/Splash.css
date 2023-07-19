@@ -60,11 +60,6 @@
     }
 }
 
-.splash__bottom-links {
-    display: flex;
-    border: 2px solid green;
-}
-
 .splash__outer {
     display: grid;
     grid-template-rows: 5% 85% 10%;
@@ -100,4 +95,14 @@
 .splash__main h1 {
     font-size: 80px;
     font-weight: 100;
+}
+
+.splash__bottom-links {
+    display: flex;
+    background-color: black;
+    color: white;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 20px;
+    padding-left: 20px;
 }
