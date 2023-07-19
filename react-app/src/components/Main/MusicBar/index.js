@@ -35,7 +35,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
             </div>
             <div className="music-bar__song-div">
                 <div className="music-bar__play-all">
-                    <p className="music-bar__timers">{currentSong.id && playedTime}</p>
+                    <p className="music-bar__timers">{currentSong?.id && playedTime}</p>
                     <input
                         className="music-bar__range"
                         type="range"
@@ -46,18 +46,18 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                         max={1}
                         onChange={changeTime}
                     />
-                    <p className="music-bar__timers">{currentSong.id && totalLength}</p>
+                    <p className="music-bar__timers">{currentSong?.id && totalLength}</p>
                 </div>
-                {currentSong.id && <div className="music-bar__action-buttons">
+                <div className="music-bar__action-buttons">
                     {queue.prevSongs.length ? <i onClick={prevSong} class="music-bar__next-on fa-solid fa-backward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
-                    <i
+                    {currentSong?.id && <i
                         onClick={() => setPaused(!paused)}
                         disabled={!currentSong?.id}
                         className={paused ? "music-bar__play-button fa-solid fa-circle-play" : "music-bar__play-button fa-solid fa-circle-pause"}
                     >
-                    </i>
+                    </i>}
                     {queue.nextSongs.length ? <i onClick={nextSong} class="music-bar__next-on fa-solid fa-forward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
-                </div>}
+                </div>
 
             </div>
             <div className="music-bar__queue">
