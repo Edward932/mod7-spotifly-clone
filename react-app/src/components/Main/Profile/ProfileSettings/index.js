@@ -26,12 +26,12 @@ export default function ProfileSettings () {
     return (
         <div className="profile-settings__outer">
             <div className="profile-settings__upper">
-                <p>Username: {user.username}</p>
-                <p>Email: {user.email}</p>
+                <p><i className="fa-regular fa-user"></i> {user.username}</p>
+                <p><i class="fa-regular fa-envelope"></i> {user.email}</p>
             </div>
-            <div>
-                <button onClick={closeModal}>Close</button>
-                <button onClick={handleLogout}>Logout</button>
+            <div className="profile-settings__lower">
+                <button className="profile-settings__close" onClick={closeModal}>Close</button>
+                <button className="profile-settings__logout" onClick={handleLogout}>Logout</button>
             </div>
         </div>
     )

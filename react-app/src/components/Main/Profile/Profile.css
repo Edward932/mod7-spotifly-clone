@@ -1,4 +1,23 @@
 .profile__top-div {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 30px;
+}
+
+.profile__top-div button {
+    background-color: var(--primary-blue);
+    border: none;
+    width: 100px;
+    border-radius: 20px;
+    height: 30px;
+    color: white;
+}
+
+.profile__top-div button:hover {
+    background-color: var(--primary-blue-h);
+}
+
+.profile__column-headers {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
 }

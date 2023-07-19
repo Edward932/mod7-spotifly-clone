@@ -1,7 +1,54 @@
 .profile-song-card__outer-div {
     width: 100%;
-    border: 2px solid purple;
-    display: flex;
-    justify-content: space-between;
+    background-color: rgba(0 0 0 / .3);
+    padding: 10px;
+    border-radius: 10px;
+    display: grid;
+    grid-template-columns: 33% 51% 16%;
     margin-top: 10px;
+}
+
+.profile-song-card__title {
+    font-size: 20px;
+    font-weight: 200;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    width: calc(100%);
+}
+
+.profile-song-card__title-div {
+    width: calc(75%);
+}
+
+.profile-song-card__description {
+    font-size: 15px;
+    color: lightgray;
+    margin-right: 20px;
+}
+
+.profile-song-card__buttons {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 20px;
+}
+
+.profile-song-card__buttons button {
+    font-size: 25px;
+    background-color: transparent;
+    border: none;
+    color: lightgray;
+}
+
+.profile-song-card__buttons button:active {
+    transform: translateY(4px);
+}
+
+.profile-song-card__delete:hover {
+    color: var(--primary-red)
+}
+
+.profile-song-card__edit:hover {
+    color: var(--primary-blue)
 }
