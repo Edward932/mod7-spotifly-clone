@@ -1,38 +1,45 @@
 .music-bar__outer-div {
-    display: flex;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 200px 1fr 200px;
     align-items: center;
+    justify-content: center;
     width: 100%;
     color: white;
+    height: 100%;
+    padding-bottom: 10px;
 }
 
 .music-bar__song-div {
     width: 100%;
-    display: grid;
-    grid-template-columns: 15% 70% 15%;
+    max-width: 700px;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    gap: 10px;
+    margin-right: auto;
+    margin-left: auto;
 }
 
 .music-bar__range {
-    appearance: none;
-    background: transparent;
     cursor: pointer;
     width: 100%;
+    accent-color: lightgray;
+}
+
+.music-bar__range:hover {
+    cursor: pointer;
+    width: 100%;
+    accent-color: var(--primary-green);
 }
 
 .music-bar__range::-webkit-slider-runnable-track {
-    appearance: none;
-    background: var(--primary--gray);
     height: 8px;
     border-radius: 8px;
 }
 
 .music-bar__range::-webkit-slider-thumb {
-    appearance: none;
-    background-color: var(--primary-blue);
-    height: 15px;
-    width: 15px;
-    border-radius: 15px;
     margin-top: -4px;
+    appearance: none;
 }
 
 .music-bar__play-all {
@@ -45,6 +52,8 @@
 .music-bar__timers {
     width: 100%;
     text-align: center;
+    font-size: 15px;
+    color: lightgray;
 }
 
 .music-bar__play-bar-played {
