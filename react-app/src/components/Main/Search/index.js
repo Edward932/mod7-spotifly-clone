@@ -38,7 +38,7 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
             })
             setFollowingState(normalizedFolloing);
         })()
-    }, []);
+    }, [dispatch]);
 
     useEffect(() => {
         setSongArray(Object.values(songs));

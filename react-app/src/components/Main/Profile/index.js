@@ -25,7 +25,7 @@ export default function Profile () {
 
     useEffect(() => {
         setSongs(Object.values(songsStore))
-    }, [newDelete])
+    }, [newDelete, songsStore])
 
 
     return (

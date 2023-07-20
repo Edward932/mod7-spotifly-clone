@@ -13,7 +13,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
     useEffect(() => {
         setPlayedTime(readableTime(audioEl.current.currentTime));
         range.current.value = playedLength;
-    }, [playedLength]);
+    }, [playedLength, audioEl]);
 
     const changeTime = (e) => {
         if(!currentSong?.id) return;

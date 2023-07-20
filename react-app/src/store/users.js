@@ -77,7 +77,7 @@ export const deleteFollowThunk = (userId) => async (dispatch) => {
 
 const initialState = { searchUsers: {}, currentUser: {}, following: {}, followers: {} };
 
-export default function(state = initialState, action) {
+export default function reducer(state = initialState, action) {
     switch(action.type) {
         case SEARCH_USERS:
             const normalizedUsers = {};

@@ -18,7 +18,7 @@ export default function Feed({ setPlayedLength, setPaused, audioEl, setCurrentSo
             const res = await dispatch(getFeedThunk())
             setSongsArr(res.payload);
         })();
-    }, []);
+    }, [dispatch]);
 
     return (
         <div className='feed__outer'>
