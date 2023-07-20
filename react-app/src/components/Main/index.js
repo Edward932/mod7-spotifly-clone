@@ -129,7 +129,12 @@ export default function Main() {
                             <div>Popular coming soon!</div>
                         </Route>
                         <Route path="/main">
-                            <Feed />
+                            <Feed
+                                setPlayedLength={setPlayedLength}
+                                setPaused={setPaused}
+                                audioEl={audioEl}
+                                setCurrentSong={setCurrentSong}
+                            />
                         </Route>
                     </Switch>
                 </div>

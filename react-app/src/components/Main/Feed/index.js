@@ -1,8 +1,10 @@
 import { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFeedThunk } from '../../../store/songs';
+import './Feed.css';
+import FeedSongCard from './FeedSongCard';
 
-export default function Feed() {
+export default function Feed({ setPlayedLength, setPaused, audioEl, setCurrentSong}) {
     const feedSongs = useSelector(state => state.songs.feedSongs);
 
     const [songsArr, setSongsArr] = useState(Object.values(feedSongs));
@@ -17,16 +19,19 @@ export default function Feed() {
         })();
     }, []);
 
-
-    console.log(songsArr);
-
     return (
         <div>
             <h1>FEED</h1>
             <ul>
                 {songsArr.map(song => (
                     <li key={song.id}>
-                        {song.name}
+                        <FeedSongCard
+                                        song={song}
+                                        setPlayedLength={setPlayedLength}
+                                        setPaused={setPaused}
+                                        audioEl={audioEl}
+                                        setCurrentSong={setCurrentSong}
+                        />
                     </li>
                 ))}
             </ul>
