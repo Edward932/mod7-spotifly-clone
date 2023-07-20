@@ -14,7 +14,13 @@ def song(songId):
     """
     Query for one song and return a dict
     """
-    song = Song.query.get(songId)
+    print("IN SONG THING")
+
+    song = Song.query.filter(Song.id == songId).one_or_none()
+
+    if song is None:
+        return {}
+
     return song.to_dict()
 
 @songs_routes.route('', methods=["POST"])
