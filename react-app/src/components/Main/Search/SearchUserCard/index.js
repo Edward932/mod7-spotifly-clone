@@ -16,11 +16,15 @@ export default function SearchUserCard({ user, following }) {
 
     return (
         <div className='search-user-card__outer'>
-            <div>
+            <div className='search-user-card__user'>
                 <i class="fa-solid fa-user"></i> {user.username}
             </div>
-            <button>View page (not complete)</button>
-            {following[user.id] ? <button onClick={handleUnfollow}>Unfollow(not working)</button> : <button onClick={handleFollow}>Follow</button>}
+            <div className='search-user-card__button-divs'>
+                <button className='search-user-card__view'>View page (ND)</button>
+            </div>
+            <div className='search-user-card__button-divs'>
+                {following[user.id] ? <button className='search-user-card__unfollow' onClick={handleUnfollow}>Unfollow</button> : <button className='search-user-card__follow' onClick={handleFollow}>Follow</button>}
+            </div>
         </div>
     )
 }

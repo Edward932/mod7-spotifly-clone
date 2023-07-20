@@ -1,7 +1,64 @@
 .search-user-card__outer {
-    display: flex;
-    border: 2px solid orange;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    width: 100%;
+    background-color: rgba(0 0 0 / .3);
+    padding: 10px;
+    border-radius: 10px;
     margin-top: 20px;
     align-items: center;
     justify-content: space-between;
+}
+
+.search-user-card__user {
+    font-size: 25px;
+    font-weight: 100;
+}
+
+.search-user-card__view {
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: lightgray;
+}
+
+.search-user-card__view:hover {
+    background-color: white;
+}
+
+.search-user-card__unfollow {
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: var(--primary-blue);
+    color: white;
+}
+
+.search-user-card__unfollow:hover {
+    background-color: var(--primary-blue-h);
+}
+
+.search-user-card__follow {
+    width: 150px;
+    height: 30px;
+    border: none;
+    border-radius: 30px;
+    background-color: lightgray;
+    color: var(--primary-blue);
+}
+
+.search-user-card__follow:hover {
+    background-color: white;
+}
+
+.search-user-card__button-divs {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+}
+
+.search-user-card__button-divs button:active {
+    transform: translateY(4px);
 }
