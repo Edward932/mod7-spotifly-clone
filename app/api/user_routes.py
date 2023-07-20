@@ -59,6 +59,22 @@ def create_follow():
     return [ follow.to_dict_following() for follow in follows ]
 
 
+@user_routes.route("/follow", methods=["DELETE"])
+@login_required
+def delete_follow():
+    following_id = request.data.decode()
+
+    current_follow = Follow.query.filter(and_(Follow.follower_id == current_user.id, Follow.following_id == following_id)).one_or_none()
+
+    if current_follow is not None:
+        db.session.delete(current_follow)
+        db.session.commit()
+
+    follows = Follow.query.filter(Follow.follower_id == current_user.id).all()
+
+    return [ follow.to_dict_following() for follow in follows ]
+
+
 @user_routes.route("/following")
 @login_required
 def get_following():

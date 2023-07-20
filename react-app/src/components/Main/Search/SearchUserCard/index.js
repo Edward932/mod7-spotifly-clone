@@ -1,4 +1,4 @@
-import { createFollowThunk } from '../../../../store/users';
+import { createFollowThunk, deleteFollowThunk } from '../../../../store/users';
 import './SearchUserCard.css';
 import { useDispatch } from 'react-redux';
 
@@ -10,8 +10,9 @@ export default function SearchUserCard({ user, following }) {
     }
 
     const handleUnfollow = () => {
-        alert("UNFOLLOW NOT READY")
+        dispatch(deleteFollowThunk(user.id))
     }
+
 
     return (
         <div className='search-user-card__outer'>

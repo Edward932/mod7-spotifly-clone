@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
-from app.models import db, Song
+from app.models import db, Song, Follow
 from app.aws import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.forms import SongForm
 from sqlalchemy import exc
@@ -145,3 +145,15 @@ def update_song(songId):
         return song.to_dict()
 
     return { "error": form.errors }
+
+
+@songs_routes.route("/feed")
+@login_required
+def get_feed():
+    following = Follow.query.filter(Follow.follower_id == current_user.id).all()
+
+    following_lst = [ follow.to_dict_following()["following"] for follow in following ]
+
+    songs = Song.query.filter(Song.owner_id.in_(following_lst)).order_by(Song.created_at).all()
+
+    return [ song.to_dict(timestamps=True) for song in songs ]
