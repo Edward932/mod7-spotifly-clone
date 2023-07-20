@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from app.models import User, Follow, db
+from sqlalchemy import and_
 
 user_routes = Blueprint('users', __name__)
 
@@ -42,13 +43,25 @@ def search_users():
 def create_follow():
     following_id = request.data.decode()
 
-    new_follow = Follow(
-        follower_id=current_user.id,
-        following_id=following_id
-    )
-    db.session.add(new_follow)
-    db.session.commit()
+    current_follow = Follow.query.filter(and_(Follow.follower_id == current_user.id, Follow.following_id == following_id)).one_or_none()
+
+    if current_follow is None:
+        new_follow = Follow(
+            follower_id=current_user.id,
+            following_id=following_id
+        )
+
+        db.session.add(new_follow)
+        db.session.commit()
 
     follows = Follow.query.filter(Follow.follower_id == current_user.id).all()
 
-    return [ follow.to_dict() for follow in follows]
+    return [ follow.to_dict_following() for follow in follows ]
+
+
+@user_routes.route("/following")
+@login_required
+def get_following():
+    followings = Follow.query.filter(Follow.follower_id == current_user.id).all()
+
+    return [ follow.to_dict_following() for follow in followings]
