@@ -8,6 +8,9 @@ export default function NavBar() {
             <NavLink exact to="/main">
                 <i className="fa-solid fa-house"></i>
             </NavLink>
+            <NavLink to="/main/popular">
+                <i className="fa-solid fa-fire"></i>
+            </NavLink>
             <NavLink to="/main/search">
                 <i className="fa-solid fa-magnifying-glass"></i>
             </NavLink>
