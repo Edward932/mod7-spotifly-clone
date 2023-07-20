@@ -3,13 +3,17 @@ import { useDispatch, useSelector } from "react-redux";
 import { searchSongsThunk } from "../../../store/songs";
 import SearchSongCard from "./SearchSongCard";
 import './Search.css';
+import { searchUsersThunk } from "../../../store/users";
+import SearchUserCard from "./SearchUserCard";
 
 export default function Search({ setPlayedLength, setPaused, audioEl, setCurrentSong }) {
     const songs = useSelector(state => state.songs.searchSongs);
+    const users = useSelector(state => state.users.searchUsers);
 
     const [search, setSearch] = useState("");
     const [type, setType] = useState("songs");
-    const [songArray, setSongArray] = useState([])
+    const [songArray, setSongArray] = useState([]);
+    const [usersArray, setUsersArray] = useState([]);
 
     const dispatch = useDispatch();
 
@@ -17,19 +21,24 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
         e.preventDefault();
         if(type === "songs") {
             dispatch(searchSongsThunk(search));
-        } else {
-            alert("SEARCH FOR ARTISTS NOT IMPLEMENTED")
+        } else if (type === "artists") {
+            dispatch(searchUsersThunk(search))
         }
     }
 
     useEffect(() => {
-        setSongArray(Object.values(songs))
-    }, [songs])
+        setSongArray(Object.values(songs));
+    }, [songs]);
+
+    useEffect(() => {
+        setUsersArray(Object.values(users));
+    }, [users]);
 
 
     useEffect(() => {
-        setSongArray([])
-    }, []);
+        setSongArray([]);
+        setUsersArray([]);
+    }, [type]);
 
     const handleType = (e) => {
         e.preventDefault();
@@ -68,19 +77,28 @@ export default function Search({ setPlayedLength, setPaused, audioEl, setCurrent
                 </div>
             </form>
             <div className="search__list-div">
-                <div className="search__column-headers"><p>Title</p><p>Description</p></div>
+                <div className="search__column-headers">{type === "songs" ? <><p>Title</p><p>Description</p></> : <p>Name</p> }</div>
                 <ul className="search__list">
-                    {songArray.map(song => (
-                        <li key={song.id}>
-                            <SearchSongCard
-                                song={song}
-                                setPlayedLength={setPlayedLength}
-                                setPaused={setPaused}
-                                audioEl={audioEl}
-                                setCurrentSong={setCurrentSong}
-                            />
-                        </li>
-                    ))}
+                    {type === "songs"
+                        ?
+                            songArray.map(song => (
+                                <li key={song.id}>
+                                    <SearchSongCard
+                                        song={song}
+                                        setPlayedLength={setPlayedLength}
+                                        setPaused={setPaused}
+                                        audioEl={audioEl}
+                                        setCurrentSong={setCurrentSong}
+                                    />
+                                </li>
+                            ))
+                        :
+                            usersArray.map(user => (
+                                <li key={user.id}>
+                                    <SearchUserCard user={user} />
+                                </li>
+                            ))
+                    }
                 </ul>
             </div>
         </div>

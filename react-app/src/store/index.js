@@ -3,11 +3,13 @@ import thunk from 'redux-thunk';
 import session from './session';
 import songs from './songs';
 import queue from './queue';
+import users from './users';
 
 const rootReducer = combineReducers({
   session,
   songs,
   queue,
+  users,
 });
 
 

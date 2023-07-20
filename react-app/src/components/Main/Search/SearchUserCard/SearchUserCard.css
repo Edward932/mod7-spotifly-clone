@@ -1,0 +1,7 @@
+.search-user-card__outer {
+    display: flex;
+    border: 2px solid orange;
+    margin-top: 20px;
+    align-items: center;
+    justify-content: space-between;
+}

@@ -63,6 +63,7 @@ def search_songs():
     songs = Song.query.filter(Song.name.ilike(f"%{search_name}%")).all()
 
     if len(songs) == 0:
+        # do somehting to show no results
         pass
 
     return [ song.to_dict() for song in songs ]
