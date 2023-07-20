@@ -1,0 +1,5 @@
+.feed__display-list {
+    display: grid;
+    grid-template-columns: 25% 45% 40%;
+    margin-top: 30px;
+}

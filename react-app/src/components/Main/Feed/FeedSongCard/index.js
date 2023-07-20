@@ -27,6 +27,10 @@ export default function FeedSongCard({ song, setPlayedLength, setPaused, audioEl
                 <p className="feed-song-card__auther">{song.owner.username}</p>
             </div>
             <p className="feed-song-card__description">{song.description}</p>
+            <div>
+                <p className="feed-song-card__date">{song.createdAt.split("LB")[0]}</p>
+                <p className="feed-song-card__date">{song.createdAt.split("LB")[1]}</p>
+            </div>
             <div className="feed-song-card__buttons">
                 <i onClick={handleAddQueue}class="fa-solid fa-plus"></i>
                 <i onClick={handlePlay} className="fa-solid fa-circle-play"></i>

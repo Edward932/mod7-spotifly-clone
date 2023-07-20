@@ -4,7 +4,7 @@
     padding: 10px;
     border-radius: 10px;
     display: grid;
-    grid-template-columns: 33% 51% 16%;
+    grid-template-columns: 25% 45% 20% 10%;
     margin-top: 10px;
 }
 
@@ -32,6 +32,12 @@
 }
 
 .feed-song-card__description {
+    font-size: 15px;
+    color: lightgray;
+    margin-right: 20px;
+}
+
+.feed-song-card__date {
     font-size: 15px;
     color: lightgray;
     margin-right: 20px;

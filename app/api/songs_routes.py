@@ -154,6 +154,6 @@ def get_feed():
 
     following_lst = [ follow.to_dict_following()["following"] for follow in following ]
 
-    songs = Song.query.filter(Song.owner_id.in_(following_lst)).order_by(Song.created_at).all()
+    songs = Song.query.filter(Song.owner_id.in_(following_lst)).order_by(Song.created_at.desc()).all()
 
     return [ song.to_dict(timestamps=True) for song in songs ]

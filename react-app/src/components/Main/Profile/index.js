@@ -31,7 +31,7 @@ export default function Profile () {
     return (
         <div>
             <div className='profile__top-div'>
-                <h1><i class="fa-regular fa-user"></i> {user?.username}</h1>
+                <h1><i className="fa-regular fa-user"></i> {user?.username}</h1>
                 <OpenModalButton
                     modalComponent={<ProfileSettings />}
                     buttonText={"Settings"}/>
