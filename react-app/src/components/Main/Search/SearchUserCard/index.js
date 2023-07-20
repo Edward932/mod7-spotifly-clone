@@ -17,7 +17,7 @@ export default function SearchUserCard({ user, following }) {
     return (
         <div className='search-user-card__outer'>
             <div className='search-user-card__user'>
-                <i class="fa-solid fa-user"></i> {user.username}
+                <i className="fa-solid fa-user"></i> {user.username}
             </div>
             <div className='search-user-card__button-divs'>
                 <button className='search-user-card__view'>View page (ND)</button>

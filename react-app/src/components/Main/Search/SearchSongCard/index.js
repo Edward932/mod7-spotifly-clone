@@ -28,7 +28,7 @@ export default function SearchSongCard({ song, setPlayedLength, setPaused, audio
             </div>
             <p className="search-song-card__description">{song.description}</p>
             <div className="search-song-card__buttons">
-                <i onClick={handleAddQueue}class="fa-solid fa-plus"></i>
+                <i onClick={handleAddQueue}className="fa-solid fa-plus"></i>
                 <i onClick={handlePlay} className="fa-solid fa-circle-play"></i>
             </div>
         </div>

@@ -25,7 +25,7 @@ export default function ProfileSongCard({ song, setNewDelete, newDelete }) {
                         setNewDelete={setNewDelete}
                         newDelete={newDelete} />
                     }
-                    buttonText={<i class="profile-song-card__delete fa-solid fa-trash"></i>}
+                    buttonText={<i className="profile-song-card__delete fa-solid fa-trash"></i>}
                 />
             </div>
         </div>

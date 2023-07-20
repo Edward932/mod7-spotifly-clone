@@ -8,7 +8,7 @@ export default function Splash() {
         <div className="splash__outer">
             <div className="splash__top-nav">
                 <div className='splash__top-nav-home'>
-                    <i class="fa-brands fa-spotify"></i>
+                    <i className="fa-brands fa-spotify"></i>
                     <p>SoundSpot</p>
                 </div>
                 <Link

@@ -32,7 +32,7 @@ export default function FeedSongCard({ song, setPlayedLength, setPaused, audioEl
                 <p className="feed-song-card__date">{song.createdAt.split("LB")[1]}</p>
             </div>
             <div className="feed-song-card__buttons">
-                <i onClick={handleAddQueue}class="fa-solid fa-plus"></i>
+                <i onClick={handleAddQueue}className="fa-solid fa-plus"></i>
                 <i onClick={handlePlay} className="fa-solid fa-circle-play"></i>
             </div>
         </div>

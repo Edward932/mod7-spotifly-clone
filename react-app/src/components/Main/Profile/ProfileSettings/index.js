@@ -27,7 +27,7 @@ export default function ProfileSettings () {
         <div className="profile-settings__outer">
             <div className="profile-settings__upper">
                 <p><i className="fa-regular fa-user"></i> {user.username}</p>
-                <p><i class="fa-regular fa-envelope"></i> {user.email}</p>
+                <p><i className="fa-regular fa-envelope"></i> {user.email}</p>
             </div>
             <div className="profile-settings__lower">
                 <button className="profile-settings__close" onClick={closeModal}>Close</button>
