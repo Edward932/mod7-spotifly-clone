@@ -143,7 +143,12 @@ def update_song(songId):
         song.description = form.data["description"]
         song.aws_src = url
 
-        db.session.commit()
+        try:
+            db.session.commit()
+        except exc.IntegrityError as e:
+            return { "error": {
+                "name": ["Song name is taken. Please change name and upload agian"]
+            }}
         return song.to_dict()
 
     return { "error": form.errors }
