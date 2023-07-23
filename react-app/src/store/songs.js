@@ -100,7 +100,6 @@ export const deleteSongThunk = (songId) => async (dispatch) => {
 
     if (res.ok) {
         const data = await res.json();
-        console.log('data in thunk', data)
         const id = data.songId
         return dispatch(deleteSong(id));
     } else {
@@ -165,7 +164,6 @@ export default function reducer(state = initialState, action) {
         case UPDATE_SONG:
             const updatedUserSongs = state.userSongs;
             updatedUserSongs[action.payload.id] = action.payload
-            console.log('in reducer', updatedUserSongs)
             return { ...state, userSongs: updatedUserSongs }
         case GET_FEED:
             const normalizedFeedSongs = {};

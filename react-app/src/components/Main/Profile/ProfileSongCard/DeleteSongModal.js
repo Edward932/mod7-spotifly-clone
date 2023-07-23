@@ -17,7 +17,6 @@ export default function DeleteSongModal ({ songId, setNewDelete, newDelete}) {
         setDeleting(true);
         const res = await dispatch(deleteSongThunk(songId));
         setNewDelete(!newDelete)
-        console.log('RES IN HANDLE DELTE', res)
         closeModal();
     }
 

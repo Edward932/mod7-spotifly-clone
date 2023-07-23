@@ -20,7 +20,7 @@ export default function SearchUserCard({ user, following }) {
                 <i className="fa-solid fa-user"></i> {user.username}
             </div>
             <div className='search-user-card__button-divs'>
-                <button className='search-user-card__view'>View page (ND)</button>
+                <button onClick={() => alert("Feature coming soon")} className='search-user-card__view'>View page</button>
             </div>
             <div className='search-user-card__button-divs'>
                 {following[user.id] ? <button className='search-user-card__unfollow' onClick={handleUnfollow}>Unfollow</button> : <button className='search-user-card__follow' onClick={handleFollow}>Follow</button>}
