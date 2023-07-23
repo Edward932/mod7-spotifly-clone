@@ -36,7 +36,7 @@ class Song(db.Model):
         }
 
         if timestamps:
-            dct["createdAt"] = self.created_at
+            dct["createdAt"] = self.created_at.strftime('%a %m, %y LB %I:%M %p')
             dct["updatedAt"] = self.updated_at
 
         return dct

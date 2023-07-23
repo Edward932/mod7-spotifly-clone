@@ -4,6 +4,7 @@ const SEARCH_SONGS = "songs/SEARCH_SONGS";
 const GET_USER_SONGS = "songs/GET_USER_SONGS";
 const DELETE_SONG = "songs/DELETE_SONG";
 const UPDATE_SONG = "songs/UPDATE_SONG";
+const GET_FEED = "songs/GET_FEED";
 
 const getSong = (song) => ({
     type: GET_SONG,
@@ -33,6 +34,11 @@ const deleteSong = (songId) => ({
 const updateSong = (song) => ({
     type: UPDATE_SONG,
     payload: song
+});
+
+const getFeed = (songs) => ({
+    type: GET_FEED,
+    payload: songs
 });
 
 export const getSongThunk = (songId) => async (dispatch) => {
@@ -120,6 +126,18 @@ export const updateSongThunk = (song, songId) => async (dispatch) => {
     }
 }
 
+export const getFeedThunk = () => async (dispatch) => {
+    const res = await fetch('/api/songs/feed');
+
+    if(res.ok) {
+        const data = await res.json();
+        return dispatch(getFeed(data));
+    } else {
+        alert("ERROR IN GET FEED THUNK");
+    }
+}
+
+
 const initialState = { currentSong: {}, feedSongs: {}, searchSongs: {}, userSongs: {} }
 
 export default function reducer(state = initialState, action) {
@@ -149,6 +167,12 @@ export default function reducer(state = initialState, action) {
             updatedUserSongs[action.payload.id] = action.payload
             console.log('in reducer', updatedUserSongs)
             return { ...state, userSongs: updatedUserSongs }
+        case GET_FEED:
+            const normalizedFeedSongs = {};
+            action.payload.forEach(song => {
+                normalizedFeedSongs[song.id] = song;
+            });
+            return { ...state, feedSongs: normalizedFeedSongs }
         default:
             return state;
     }

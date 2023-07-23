@@ -13,7 +13,7 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
     useEffect(() => {
         setPlayedTime(readableTime(audioEl.current.currentTime));
         range.current.value = playedLength;
-    }, [playedLength]);
+    }, [playedLength, audioEl]);
 
     const changeTime = (e) => {
         if(!currentSong?.id) return;
@@ -49,14 +49,14 @@ export default function MusicBar({ queue, paused, setPaused, currentSong, played
                     <p className="music-bar__timers">{currentSong?.id && totalLength}</p>
                 </div>
                 <div className="music-bar__action-buttons">
-                    {queue.prevSongs.length ? <i onClick={prevSong} class="music-bar__next-on fa-solid fa-backward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
+                    {queue.prevSongs.length ? <i onClick={prevSong} className="music-bar__next-on fa-solid fa-backward"></i> : <i className="music-bar__next-off fa-solid fa-ban"></i>}
                     {currentSong?.id && <i
                         onClick={() => setPaused(!paused)}
                         disabled={!currentSong?.id}
                         className={paused ? "music-bar__play-button fa-solid fa-circle-play" : "music-bar__play-button fa-solid fa-circle-pause"}
                     >
                     </i>}
-                    {queue.nextSongs.length ? <i onClick={nextSong} class="music-bar__next-on fa-solid fa-forward"></i> : <i class="music-bar__next-off fa-solid fa-ban"></i>}
+                    {queue.nextSongs.length ? <i onClick={nextSong} className="music-bar__next-on fa-solid fa-forward"></i> : <i className="music-bar__next-off fa-solid fa-ban"></i>}
                 </div>
 
             </div>

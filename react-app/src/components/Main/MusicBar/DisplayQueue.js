@@ -62,7 +62,7 @@ export default function DisplayQueue() {
                 }
             </div>
             <ul className="display-queue__ul">
-                {nextSongs.length == 0 ? <p className="display-queue__now">No songs in queue</p> : <p className="display-queue__now">Songs in queue</p>}
+                {nextSongs.length === 0 ? <p className="display-queue__now">No songs in queue</p> : <p className="display-queue__now">Songs in queue</p>}
                 {nextSongs.map((song, i) => (
                     <li key={Math.random()} className="display-queue__li">
                         <p className="display-queue__li-title">{song.name}</p>

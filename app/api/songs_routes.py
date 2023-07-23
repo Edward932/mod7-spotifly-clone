@@ -1,6 +1,6 @@
 from flask import Blueprint, request, redirect
 from flask_login import login_required, current_user
-from app.models import db, Song
+from app.models import db, Song, Follow
 from app.aws import upload_file_to_s3, get_unique_filename, remove_file_from_s3
 from app.forms import SongForm
 from sqlalchemy import exc
@@ -14,7 +14,13 @@ def song(songId):
     """
     Query for one song and return a dict
     """
-    song = Song.query.get(songId)
+    print("IN SONG THING")
+
+    song = Song.query.filter(Song.id == songId).one_or_none()
+
+    if song is None:
+        return {}
+
     return song.to_dict()
 
 @songs_routes.route('', methods=["POST"])
@@ -63,6 +69,7 @@ def search_songs():
     songs = Song.query.filter(Song.name.ilike(f"%{search_name}%")).all()
 
     if len(songs) == 0:
+        # do somehting to show no results
         pass
 
     return [ song.to_dict() for song in songs ]
@@ -144,3 +151,15 @@ def update_song(songId):
         return song.to_dict()
 
     return { "error": form.errors }
+
+
+@songs_routes.route("/feed")
+@login_required
+def get_feed():
+    following = Follow.query.filter(Follow.follower_id == current_user.id).all()
+
+    following_lst = [ follow.to_dict_following()["following"] for follow in following ]
+
+    songs = Song.query.filter(Song.owner_id.in_(following_lst)).order_by(Song.created_at.desc()).all()
+
+    return [ song.to_dict(timestamps=True) for song in songs ]

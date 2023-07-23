@@ -9,6 +9,7 @@ import NavBar from "./NavBar";
 import Search from "./Search";
 import { loadQueueThunk, playNextSongThunk, playPrevSongThunk } from "../../store/queue";
 import Profile from "./Profile";
+import Feed from "./Feed";
 
 export default function Main() {
     const songId = useSelector(state => state.queue.currentSong);
@@ -125,10 +126,15 @@ export default function Main() {
                             <Profile />
                         </Route>
                         <Route path="/main/popular">
-                            <div>Popular coming soon!</div>
+                            <h1>Popular coming soon!</h1>
                         </Route>
-                        <Route>
-                            <div>Feed coming soon!</div>
+                        <Route path="/main">
+                            <Feed
+                                setPlayedLength={setPlayedLength}
+                                setPaused={setPaused}
+                                audioEl={audioEl}
+                                setCurrentSong={setCurrentSong}
+                            />
                         </Route>
                     </Switch>
                 </div>
