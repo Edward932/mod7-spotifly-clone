@@ -106,3 +106,27 @@
     padding-right: 20px;
     padding-left: 20px;
 }
+
+.splash__button-links {
+    color: white;
+    text-decoration: none;
+}
+
+.splash__button-links:active {
+    color: white;
+    text-decoration: none;
+}
+
+.splash__button-links:hover {
+    text-decoration: underline;
+}
+
+.splash__bottom-corners {
+    display: flex;
+    flex-direction: column;
+}
+
+.splash__bottom-middle {
+    display: flex;
+    gap: 20px;
+}
