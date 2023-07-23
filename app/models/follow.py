@@ -7,7 +7,10 @@ class Follow(db.Model):
     __tablename__ = "follows"
 
     if environment == "production":
-        __table_args__ = {"schema": SCHEMA}
+        __table_args__ = (UniqueConstraint("follower_id", "following_id", name="_unique_follower"), {"schema": SCHEMA})
+    else:
+        __table_args__ = (UniqueConstraint("follower_id", "following_id", name="_unique_follower"),)
+
 
     id = db.Column(db.Integer, primary_key=True)
     follower_id = db.Column(
@@ -20,7 +23,6 @@ class Follow(db.Model):
     follower = db.relationship("User", foreign_keys=[follower_id])
     following = db.relationship("User", foreign_keys=[following_id])
 
-    __table_args__ = (UniqueConstraint("follower_id", "following_id", name="_unique_follower"),)
 
     def to_dict_following(self):
         dct = {

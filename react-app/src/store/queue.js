@@ -74,7 +74,6 @@ export const addSongNextThunk = (songId) => async (dispatch) => {
 
     if(res.ok) {
         const data = await res.json();
-        console.log(data)
         return dispatch(addSongNext(data.nextSongs));
     } else {
         alert("ERROR IN ADD SONG THUNK")

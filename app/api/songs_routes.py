@@ -14,7 +14,6 @@ def song(songId):
     """
     Query for one song and return a dict
     """
-    print("IN SONG THING")
 
     song = Song.query.filter(Song.id == songId).one_or_none()
 
@@ -33,7 +32,6 @@ def post_song():
         song = form.data["song_file"]
         song.filename = get_unique_filename(song.filename)
         upload = upload_file_to_s3(song)
-        print(upload)
 
         if "url" not in upload:
             # if the dictionary doesn't have a url key
@@ -52,7 +50,6 @@ def post_song():
         try:
             db.session.commit()
         except exc.IntegrityError as e:
-            print(e)
             return { "error": {
                 "name": ["Song name is taken. Please change name and upload agian"]
             }}
@@ -89,7 +86,6 @@ def delete_song(songId):
     song = Song.query.get(songId)
     if song.owner_id == current_user.id:
         remove = remove_file_from_s3(song.aws_src)
-        print(remove)
 
         if remove is not True:
             return remove
