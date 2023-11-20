@@ -17,7 +17,7 @@ SoundSpot is a project I made for App Academy's fullstack final project. SoundSp
 * SQLAlchemy
 * AWS S3
 * Javascript
-* Node.js
+* Python
 * Postgres
 * CSS
 * HTML
